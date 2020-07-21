@@ -1,0 +1,79 @@
+.header{
+    height: 60px;
+    background-color: antiquewhite;
+}
+.container1{
+    margin: 0px auto;
+    width: 76%;
+}
+.headertitel{
+    padding-top: 17px;
+}
+.employerlogin{
+    margin-top: 13px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 7px
+}
+.login{
+    margin-top: 25px;
+}
+.hidden{
+    background-color:rgb(202, 200, 202);
+    width: 50%;
+}
+.signinbox{
+    width: 33%;
+    padding: 20px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.21);
+    border-radius: 5px;
+}
+.user{
+    height: 45px;
+    margin-bottom: 17px;
+}
+.user input[type=txet],.pass input[type=password]{
+    height: 45px;
+    width: 100%;
+    padding: 15px;
+}
+.pass{
+    height: 45px;
+    margin-bottom: 15px;
+}
+.forgotpass{
+    text-align: right;
+    font-size: 15px;
+    margin-bottom: 17px;
+}
+.submit{
+    width: 100%;
+    background-color: royalblue;
+    text-align: center;
+    height: 40px;
+    padding-top: 7px;
+    color: white;
+    cursor: pointer;
+}
+.or{
+    color: silver;
+    text-align: center;
+}
+.otp{
+    color: lightblue;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 17px;
+}
+.signup{
+    border: 1px solid #569ee0;
+    cursor: pointer;
+    height: 40px;
+    text-align: center;
+    padding-top: 7px;
+    color: #569ee0;
+}
+.signuplink:hover{
+    text-decoration: none;
+}

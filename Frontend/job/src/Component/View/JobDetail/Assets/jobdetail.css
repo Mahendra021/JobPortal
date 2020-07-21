@@ -1,0 +1,16 @@
+div .canteiner{
+    margin: 10px auto;
+    width: 65%;
+}
+.canteiner .title{
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+.mainDetail1{
+    margin-top: 20px;
+    background-color: whitesmoke;
+    max-height: 269px;
+    width: 700px;
+    border-radius: 5px;
+    padding: 4px 15px 4px;
+}

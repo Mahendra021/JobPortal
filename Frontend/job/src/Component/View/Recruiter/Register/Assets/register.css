@@ -1,0 +1,37 @@
+.banner1{
+    background-color: green;
+    height: 60px;
+}
+.activ{
+    height: 40px;
+    font-size: 18px;
+    margin-top: 12px;
+    width: 100px;
+    color: white;
+}
+.activ em{
+    display: block;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 90px;
+    height: 4px;
+    background-color: white
+}
+.deactiv{
+    height: 40px;
+    font-size: 18px;
+    margin-top: 12px;
+    width: 160px;
+    color: white;
+}
+.deactiv em{
+    display: block;
+    margin-top: 5px;
+    margin-left: 3px;
+    width: 158px;
+    height: 4px;
+    background-color: white;
+}
+.banner1 .activ~div{
+    opacity: .6;
+}

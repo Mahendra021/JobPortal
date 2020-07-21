@@ -1,0 +1,132 @@
+.banner{
+    background-color: green;
+    height: 60px;
+}
+.banner div{
+    height: 40px;
+    font-size: 18px;
+    margin-top: 12px;
+    width: 100px;
+    color: white;
+}
+.banner div em{
+    display: block;
+    margin-top: 5px;
+    margin-left: 8px;
+    width: 87px;
+    height: 4px;
+    background-color: white;
+}
+.banner .activ~div{
+    opacity: .6;
+}
+.warp{
+    width: 990px;
+    margin: 35px auto 0;
+}
+.left{
+    width: 26%;
+    text-align: right;
+    padding-right: 15px;
+    margin: 0px;
+}
+.middle{
+    width: 47%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+}
+.mandatory:after {
+    content: '*';
+    color: #ED2D2C;
+}
+.address1{
+    width: 47%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+}
+.address2{
+    width: 23%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+    margin: 10px 11px 0 0;
+}
+.address3{
+    width: 23%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+    margin: 10px 11px 0 0;
+}
+.uplode-CV {
+    display: inline-block;
+    position: relative;
+}
+.upresume{
+    width: 160px;
+    height: 46px;
+}
+.uplode-CV input[type=file] {
+    font-size: 0px;
+    position: absolute;
+    height: 46px;
+    width: 160px;
+    left: 0;
+    opacity: 0;
+}
+.cvformat{
+    display: inline-block;
+    color: gray;
+}
+.TandC{
+    font-size: 80%;
+    margin: 0px 0px 0 10px;
+}
+.submit-box{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.submit-box button{
+    width: 160px;
+    height: 46px;
+}
+.profilecomplet{
+    background-color: green;
+    height: 60px;
+}
+.profilecomplet div{
+    height: 25px;
+    margin-top: 2px;
+    color: white;
+}
+.skill1{
+    width: 40%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+}
+.skill2{
+    width: 20%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+}
+.type{
+    display: inline-block;
+    position: relative;
+    height: 40px;
+    width: 15.7%;
+}
+.jobtype{
+    position: absolute;
+    padding: 7px;
+    width: 100%;
+    left: 0px;
+    border: 1px solid #DFDFDF;
+    text-align: center;
+}
+.employmentType{
+    position: absolute;
+    padding: 7px;
+    width: 100%;
+    left: 0px;
+    border: 1px solid #DFDFDF;
+    text-align: center;
+}

@@ -1,0 +1,420 @@
+#map{
+    position: relative;
+    min-width: 79%;
+    max-width: 79%;
+    max-height: calc(90vh - 17px);
+    min-height: calc(90vh - 17px);
+    display: inline-block;
+}
+.geocoder {
+    position: absolute;
+    z-index: 1;
+    width: 33.1%;
+    top: 0%;
+    right: 11%;
+}
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;  
+    box-shadow: none;
+    border: 1px solid lightgray;
+    border-radius: 0px;
+}
+.mapboxgl-ctrl-geocoder--input {
+    min-height: 37px !important;
+    background-image: url(/images/Search.png);
+    background-repeat: no-repeat;
+    background-size: 21px;
+    background-position: 8px 10px;
+}
+.mapboxgl-ctrl-geocoder--icon-search {
+    display: none;
+}
+.mapboxgl-ctrl-geocoder .suggestions {
+    height: 150px;
+    overflow-y: scroll;
+
+}
+.suggestions li{
+    min-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+.suggestions .mapboxgl-ctrl-geocoder--suggestion-address{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 90%;
+}
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+#detailblock{
+    margin: auto;
+    width: 80%;
+}
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+}
+.mapboxgl-popup-content {
+    position: relative;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    padding: 7px 7px !important;
+    pointer-events: auto;
+    max-width: 314px;
+    min-width: 314px;
+}
+.container {
+    background-color:  transparent;
+    min-height: 100px;
+    border-radius: 5px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.popupimg{
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 158px;
+    max-height: 158px;
+   
+}
+#text-block {
+    position: absolute;
+    top: 73px;
+    font-size: 18px;
+    padding: 5px;
+    background-color: transparent;
+    min-width: 300px;
+    max-width: 300px;
+    text-align: left;
+    overflow: hidden;
+    color: white;
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(0, 0, 0, 0.7));
+}
+.popupdesc{
+    color: white;
+}
+.title{
+    margin-bottom: 2px;
+    font-size: 20px;
+}
+.date{
+    margin-bottom: 0px;
+    font-size: 10px;
+}
+.address{
+    margin-bottom: 0px;
+    font-size: 10px;
+}
+.Zoommaindiv{
+    min-width: 40px;
+    border-radius: 5px;
+    min-height: 80px;
+    position: absolute;
+    bottom: 20px;
+    right: 12px;
+    z-index: 1;
+}
+.Zoomin{
+    border-radius: 5px;
+    padding-left: 20px;
+}
+.Zoomout{
+    border-radius: 5px;
+    padding-left: 20px;
+}
+.Location{
+    display: block;
+    padding-left: 20px;
+    min-width: 80px;
+    border-radius: 5px;
+    background-color: rgb(209, 207, 203);
+}
+.Stylediv{
+    display: none;
+    min-width: 377px;
+    border-radius: 5px;
+    min-height: 88px;
+    background-color: rgb(209, 207, 203);
+    position: absolute;
+    bottom: 60px;
+    left: 5px;
+    max-width: 400px;
+    z-index: 1;
+    cursor: pointer;
+}
+.Stylemaindiv{
+    min-width: 40px;
+    border-radius: 5px;
+    min-height: 40px;
+    background-color: rgb(209, 207, 203);
+    background: transparent;
+    position: absolute;
+    bottom: 90px;
+    left: 5px;
+    z-index: 1;
+}
+.Stylediv:hover{
+    display: block;
+}
+.Stylemaindiv:hover +.Stylediv{
+    display: block;
+}
+.map{
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+}
+.childitem{
+    min-width: 65px;
+    border-radius: 5px;
+    /* margin: 5px; */
+    margin-left: 5px;
+    min-height: 79px;
+    background-color: rgb(202, 201, 200);
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.Styleimg{
+    border-radius: 5px 5px 0px 0px;
+    max-width: 65px;
+    min-width: 65px;
+    max-height:53px ;
+}
+.Streetsposition{
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+.Lightposition{
+    position: relative;
+    top: 0px;
+    left: 115px;
+}
+.map-overlay {
+    display: inline-block;
+    position: relative;
+    width: 21%;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    max-height: calc(90vh - 17px);
+    min-height: calc(90vh - 17px);
+    overflow-y: auto;
+}
+.map-overlay .listing {
+    overflow-y: auto;
+    max-height: 100%;
+}
+     
+.map-overlay .listing > * {
+    display: block;
+    padding: 5px 5px;
+    margin: 3px 5px;
+}
+     
+.map-overlay .listing a:last-child {
+    border: none;
+}
+     
+.map-overlay .listing a:hover {
+    background: #cccccc;
+    border-radius: 5px;
+}
+#list-block{
+    font-size: 15px;
+    padding: 5px;
+    padding-top: 70px;
+    background-color: transparent;
+    min-width: 297px;
+    max-width: 297px;
+    min-height: 85px;
+    text-align: left;
+    overflow: hidden;
+    color: rgb(255, 255, 255);
+}
+.mainHolder12{
+    min-height:    100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+}
+.listCompany{
+    display: inline-block;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 8px;
+    min-width: 21%;
+}
+.fieldSearch{
+    min-width: 35%;
+}
+.locationSearch{
+    background-color: inherit;
+    min-width: 33%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border-right: 2px solid white;
+}
+.fieldSearch input[type=text]{
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    height: 39px;
+    margin: 0;
+    padding: 6px 35px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    background-image: url(/images/Search.png);
+    background-repeat: no-repeat;
+    background-size: 21px;
+    background-position: 8px 10px;
+}
+.searchbotton{
+    width: 11%;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 8px;
+}
+.searchbotton:hover{
+    background-color:rgb(29, 117, 48) ;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:#0D8C2B;
+}
+li {
+    float: left;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+.suggestionhendel{
+    display: block;
+    position: absolute;
+    width: 34.85%;
+    margin-left: 1px;
+    top: 46px;
+    z-index: 1;
+}
+.suggestionbox{
+    display: block;
+    background-color: white;
+    overflow-y: auto;
+    max-height: 150px;;
+    border-radius: 5px;
+}
+.suggestionlist{
+    width: 100%;
+    height: 31px;
+    color: black;
+    padding: 5px 0px 5px 35px;
+}
+.suggestionlist:hover{
+    background-color: #f3f3f3;
+}
+.Filtermain{
+    min-width: 40px;
+    max-width: 40px;
+    border-radius: 5px;
+    min-height: 40px;
+    max-height: 40px;
+    background-color: rgb(209, 207, 203);
+    background: transparent;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    z-index: 1;
+}
+.filter{
+    border-radius: 25px;
+    min-height: 40px;
+    max-height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+}
+.Filterdiv{
+    position: absolute;
+    display: none;
+    top: 25px;
+    right: 10px;
+    z-index: 1;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    background-color: white;
+}
+.Filterdiv:hover{
+    display: block;
+}
+::-webkit-scrollbar{
+    width: 15px;
+}
+.Filterdiv::-webkit-scrollbar{width: 0px;}
+::-webkit-scrollbar-track{
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: gray;
+    border-radius: 5px;
+}
+.Filtermain:hover +.Filterdiv{
+    display: block;
+}
+.filterlist{
+    display: block;
+    color:black;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid black;
+    font-size: 18px
+}
+.experiencelist{
+    display: none;
+    color: black;
+    height: 20px;
+    padding-left: 39px;
+    margin-left: -15px;
+    border-top: 1px solid black;
+    font-size: 13px;
+    background-image: url(/images/Arrow.png);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: 23px 5px;
+}
+.filterlist:hover{padding-bottom: 0px;color:#0D8C2B;}
+.filterlist:hover > .experiencelist{display: block; border-top: 1px solid gray;}
+.salarylist{
+    display: none;
+    color: black;
+    height: 20px;
+    padding-left: 39px;
+    margin-left: -15px;
+    border-top: 1px solid black;
+    font-size: 13px;
+    background-image: url(/images/Arrow.png);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: 23px 5px;
+}
+.filterlist:hover > .salarylist{display: block;}

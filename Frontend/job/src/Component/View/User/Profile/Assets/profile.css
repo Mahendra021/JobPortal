@@ -1,0 +1,110 @@
+.userprofile{
+    max-height: 60px;
+    max-width: 60px;
+    border-radius: 50px;
+    float: left;
+    height: 150px;
+}
+.mainDetail4{
+    margin-top: 15px;
+    background-color: whitesmoke;
+    float: left;
+    width: 100%;
+    border-radius: 5px;
+    padding: 15px 15px 14px
+}
+.subdiv{
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.05), 0 1px 2px 0 rgba(0,0,0,.1), 0 2px 20px 0 rgba(0,0,0,.2);
+    width: 25%;
+    float: left;
+}
+.subdiv1{
+    margin-left: 20px;
+    width: 72.98%;
+    float: left;
+}
+.CVupload{
+    width: 25%;
+    border: 1px solid #e8e8e8;
+    font-size: 15px;
+    padding: 5px 12px;
+    color: white;
+    background-color: #0d8c2b;
+}
+.subdiv2{
+    margin-top: 20px;
+    padding: 15px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.05), 0 1px 2px 0 rgba(0,0,0,.1), 0 2px 20px 0 rgba(0,0,0,.2);
+}
+.subdiv2 .title{
+    font-size: 20px;
+    font-weight: 700;
+    color:#6e6d6d;
+}
+.subdiv2 .title samp{
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 15px;
+    color: #4A90E2;
+    cursor: pointer;
+}
+.resume {
+    text-align: center;
+    padding: 35px 0 25px;
+    border: 1px dotted #ddd;
+    position: relative;
+}
+.resume div{
+    font-size: 12px;
+    margin-top: 5px;
+    color: #9c9c9c;
+}
+.separator{
+    margin: 30px 0 5px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.separator samp{
+    border-top: 1px solid #000;
+    display: inline-block;
+    width: 80px;
+    margin: 0 12px;
+    vertical-align: middle;
+}
+.resume input[type=file] {
+    font-size: 0px;
+    position: absolute;
+    height: 35px;
+    width: 173px;
+    left: 260px;
+    opacity: 0;
+}
+.quick{
+    padding: 17px 15px 0px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #6e6d6d;
+}
+.quicklink{
+    padding: 10px 15px;
+}
+.linkmain{
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+}
+.linksub{
+    float: right;
+    color: #4A90E2;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.skill{
+    display: inline;
+    background-color: #eee;
+    color: #666;
+    padding: 7px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
