@@ -3,6 +3,9 @@ import { creatuser, creataddress, uploadresume } from '../../../Model/UserUpload
 import './Assets/register.css'
 import * as actions from '../../../../store/actions/auth'
 import { connect } from 'react-redux'
+import {createBrowserHistory} from 'history';
+
+var history = createBrowserHistory()
 
 export class RegisterView extends Component {
     constructor(props) {
@@ -32,6 +35,8 @@ export class RegisterView extends Component {
 
         var jsonObject2 = {
             user_id: id,
+            fname: this.state.fname,
+            lname: this.state.lname,
             local_addr: this.state.address,
             local_area_name: this.state.area,
             city: this.state.city,
@@ -58,6 +63,9 @@ export class RegisterView extends Component {
             this.state.password1,
             this.state.password2
         )
+
+        history.push('/account/register/education')
+        window.location.reload()
 
     }
 

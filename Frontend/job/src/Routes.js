@@ -18,11 +18,15 @@ import Home from './Component/Controller/Home/Home'
 var history = createBrowserHistory();
 
 export class Routers extends Component {
+
+    componentDidMount() {
+        this.props.onTryAutoSignup();
+      }
     
     render() {
         return (
             <Router history={history}>
-                <div>
+                <div {...this.props}>
                     <Switch>
                         <Route exact path='/'                                       component={() => <MapPage />} />
                         <Route exact path='/recommended'                            component={() => <MapPage />} />
@@ -33,10 +37,10 @@ export class Routers extends Component {
                         <Route exact path='/company/register'                       component={() => <CompanyRegister />} />
                         <Route exact path='/recruit/login'                          component={() => <RecruitLogin />} />
                         <Route exact path='/jobpost'                                component={() => <Post />} />
-                        <Route exact path='/compnay/profile'                        component={()=> <Profile/>} />
+                        <Route exact path='/compnay/profile'                        component={() => <Profile/>} />
                         <Route exact path='/JobDetail'                              component={() => <JobDetail />} />
-                        <Route exact path='/jobseeker/profile'                      component={()=><JobSeeker/>}/>
-                        <Route exact path='/home'                                   component={()=><Home/>} />
+                        <Route exact path='/jobseeker/profile'                      component={() =><JobSeeker/>}/>
+                        <Route exact path='/home'                                   component={() =><Home/>} />
                     </Switch>
                 </div>
             </Router>

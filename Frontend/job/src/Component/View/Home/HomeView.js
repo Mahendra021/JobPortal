@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { Link,withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
 import { userdata, useraddress, usersource, higher_education, education } from '../../Model/UserData';
 import { JobIdData } from '../../Model/JobData';
 import { hendelSuggestionlist,hendelHomeSearch, hendelRecommended } from '../MapPage/Filter'
 import '../Home/Assets/home.css';
 import { hendelprofile } from './HendelProfile';
+import * as actions from '../../../store/actions/auth'
 // import {createBrowserHistory} from 'history';
 
 // var history = createBrowserHistory()
 
-export default class HomeView extends Component {
+export class HomeView extends Component {
     
     constructor(props) {
         super(props)
@@ -46,6 +49,19 @@ export default class HomeView extends Component {
             <div>
                 <ul>
                     <li className="listCompany">Name</li>
+                    {
+                    this.props.isAuthenticated ?
+    
+                    <li key="2" onClick={this.props.logout}>
+                        Logout
+                    </li>
+    
+                    :
+    
+                    <li key="2">
+                        <Link to="/login">Login</Link>
+                    </li>
+                }
                 </ul>
                 <div className="homesearch">
                     <samp>Search Jobs</samp><br/>
@@ -148,3 +164,11 @@ export default class HomeView extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(actions.logout()) 
+    }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(HomeView));

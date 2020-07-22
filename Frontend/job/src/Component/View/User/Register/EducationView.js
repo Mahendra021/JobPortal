@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { education } from '../../../Model/UserUploadData'
 import { userdata } from '../../../Model/UserData'
 import './Assets/register.css'
+import {createBrowserHistory} from 'history';
+
+var history = createBrowserHistory()
 
 export class EducationView extends Component {
     constructor(props) {
@@ -43,6 +46,9 @@ export class EducationView extends Component {
         }
 
         console.log(this.state);
+
+        history.push("/home")
+        window.location.reload()
 
     }
 

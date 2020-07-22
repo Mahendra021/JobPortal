@@ -3,6 +3,9 @@ import './Assets/Login.css'
 import { NavLink,Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../../../store/actions/auth'
+import {createBrowserHistory} from 'history';
+
+var history = createBrowserHistory()
 
 export class LoginView extends React.Component {
     constructor(props) {
@@ -16,6 +19,8 @@ export class LoginView extends React.Component {
     heandelsubmit() {
         console.log(this.state);
         this.props.onAuth(this.state.email, this.state.password)
+        history.push("/home")
+        window.location.reload()
     }
     logout() {
         this.props.logout()

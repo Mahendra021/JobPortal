@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import queryString from 'query-string'
 import './Assets/jobdetail.css'
+import { Link} from 'react-router-dom'
 import { JobIdData } from '../../Model/JobData'
 
 export class JobDetailView extends Component {
@@ -28,6 +29,19 @@ export class JobDetailView extends Component {
             <div>
                 <ul>
                     <li className="listCompany">Name</li>
+                    {
+                    this.props.isAuthenticated ?
+    
+                    <li key="2" onClick={this.props.logout}>
+                        Logout
+                    </li>
+    
+                    :
+    
+                    <li key="2">
+                        <Link to="/login">Login</Link>
+                    </li>
+                }
                 </ul>
                 <div className="canteiner">
                     <h4>About the Job in Detail</h4>
@@ -48,9 +62,9 @@ export class JobDetailView extends Component {
                             Industry : {this.state.data.length !== 0 ? this.state.data.company_depart[0].department : null}<br/>
                             Function : {this.state.data.length !== 0 ? this.state.data.company_depart[0].department : null}<br/>
                             Role : {this.state.data.length !== 0 ? this.state.data.company_depart[0].department : null}<br/>
-                            Skill : {this.state.data.length !== 0 ? this.state.data.job[0].jobskill[0].skill : null},
+                            {/* Skill : {this.state.data.length !== 0 ? this.state.data.job[0].jobskill[0].skill : null},
                             {this.state.data.length !== 0 ? this.state.data.job[0].jobskill[1].skill : null},
-                            {this.state.data.length !== 0 ? this.state.data.job[0].jobskill[2].skill : null}
+                            {this.state.data.length !== 0 ? this.state.data.job[0].jobskill[2].skill : null} */}
                         </div>
                     </div>
                     <div style={{float:"left"}}>
