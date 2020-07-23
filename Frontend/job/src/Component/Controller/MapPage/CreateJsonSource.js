@@ -9,8 +9,8 @@ export default function CreateJsonSource(list) {
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    list[i].xcoord,
-                    list[i].ycoord
+                    list[i].address[0].xcoord,
+                    list[i].address[0].ycoord
                 ]
             },
             'properties': {

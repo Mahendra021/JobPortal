@@ -52,6 +52,8 @@ class Address(models.Model):
     state = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     pincode = models.IntegerField()
+    xcoord = models.FloatField(null=True)
+    ycoord = models.FloatField(null=True)
 
     def __str__(self):
         return self.local_area_name

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -15,8 +16,6 @@ class company(models.Model):
     working_hour = models.CharField(max_length=30)
     working_day = models.CharField(max_length=30)
     no_of_emp = models.IntegerField()
-    xcoord = models.FloatField()
-    ycoord = models.FloatField()
 
     def __str__(self):
         return self.name
@@ -31,6 +30,8 @@ class company_address(models.Model):
     state = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     pincode = models.IntegerField()
+    xcoord = models.FloatField(null=True)
+    ycoord = models.FloatField(null=True)
     # distance = models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
