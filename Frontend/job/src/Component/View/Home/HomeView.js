@@ -23,7 +23,7 @@ export class HomeView extends Component {
         }
     }
 
-    async componentWillMount(){
+    async componentDidMount(){
 
         var user = await userdata(1)
         var address = await useraddress()

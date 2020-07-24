@@ -27,7 +27,7 @@ export default class RegisterView extends Component {
             telephone : this.state.moblie
         }
 
-        // var company = await AddCompany(jsonObject1)
+        var company = await AddCompany(jsonObject1)
 
     }
 
@@ -89,10 +89,10 @@ export default class RegisterView extends Component {
                             <div style={{ display: 'inline-block', width: '41%' }}>
                                 <input type="checkbox" onChange={(e) => { this.setState({ TandC: e.target.checked }) }} />
                                 <label className="TandC">
-                                    I agreed to the <a href>Terms and Conditions</a> governing the use of (NAME).
+                                    I agreed to the <a>Terms and Conditions</a> governing the use of (NAME).
                                     </label>
                                 <div className="TandC" style={{ marginLeft: '23px' }}>
-                                    I have reviewed the default <a href>Mailer & Communications settings.</a>
+                                    I have reviewed the default <a>Mailer & Communications settings.</a>
                                 </div>
                                 <div className="submit-box"><button onClick={() => this.hendelregister()}>Register Now</button></div>
                             </div>

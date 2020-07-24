@@ -17,13 +17,8 @@ export class LoginView extends React.Component {
         }
     }
     heandelsubmit() {
-        console.log(this.state);
         this.props.onAuth(this.state.email, this.state.password)
-        history.push("/home")
-        window.location.reload()
-    }
-    logout() {
-        this.props.logout()
+        return <Redirect to="/home" />
     }
 
     render() {
@@ -36,7 +31,6 @@ export class LoginView extends React.Component {
                 <div className='header'>
                     <div className="container1">
                         <div style={{ float: 'left' }} className="headertitel">NAME</div>
-                        <div style={{ float: 'left' }} onClick={() => this.logout()}>Log Out</div>
                         <NavLink style={{ float: 'right' }} className="employerlogin" to='/recruit/login'>FOR EMPLOYER</NavLink>
                     </div>
                 </div>
@@ -79,7 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password) => dispatch(actions.authLogin(email, password)),
-        logout: () => dispatch(actions.logout())
+        
     }
 }
 

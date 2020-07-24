@@ -4,7 +4,7 @@ import LoginView from '../../../View/User/Login/LoginView'
 export class Login extends Component {
     render() {
         return (
-            <LoginView />
+            <LoginView {...this.props} />
         )
     }
 }

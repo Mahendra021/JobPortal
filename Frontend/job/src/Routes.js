@@ -26,21 +26,21 @@ export class Routers extends Component {
     render() {
         return (
             <Router history={history}>
-                <div {...this.props}>
+                <div>
                     <Switch>
                         <Route exact path='/'                                       component={() => <MapPage />} />
                         <Route exact path='/recommended'                            component={() => <MapPage />} />
                         <Route exact path='/account/register/basicdetail'           component={() => <Register />} />
                         <Route exact path='/account/register/education'             component={() => <Education />} />
                         <Route exact path='/account/register/profilecompletion'     component={() => <ProfileCompletion />} />
-                        <Route exact path='/login'                                  component={() => <Login />} />
+                        <Route exact path='/login'                                  component={() => <Login {...this.props}/>} />
                         <Route exact path='/company/register'                       component={() => <CompanyRegister />} />
                         <Route exact path='/recruit/login'                          component={() => <RecruitLogin />} />
                         <Route exact path='/jobpost'                                component={() => <Post />} />
                         <Route exact path='/compnay/profile'                        component={() => <Profile/>} />
                         <Route exact path='/JobDetail'                              component={() => <JobDetail />} />
-                        <Route exact path='/jobseeker/profile'                      component={() =><JobSeeker/>}/>
-                        <Route exact path='/home'                                   component={() =><Home/>} />
+                        <Route exact path='/jobseeker/profile'                      component={() => <JobSeeker/>}/>
+                        <Route exact path='/home'                                   component={() => <Home {...this.props}/>} />
                     </Switch>
                 </div>
             </Router>

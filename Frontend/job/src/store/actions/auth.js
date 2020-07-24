@@ -57,16 +57,22 @@ export const authLogin = (email, password) => {
                 .then(response => response.json())
                 .then((responseData) => {
                     const token = responseData.key;
-                    console.log(responseData);
-                    const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-                    localStorage.setItem('token', token);
-                    localStorage.setItem('expirationDate', expirationDate);
-                    dispatch(authSuccess(token));
-                    dispatch(checkAuthTimeOut(3600));
+                    if(token === undefined){
+                        const error = responseData
+                        dispatch(authFail(error))
+                        console.log(responseData);
+                    }
+                    else{
+                        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+                        localStorage.setItem('token', token);
+                        localStorage.setItem('expirationDate', expirationDate);
+                        dispatch(authSuccess(token));
+                        dispatch(checkAuthTimeOut(3600));
+                        console.log(responseData);
+                    }
                 })
                 .catch(error => {
                     dispatch(authFail(error))
-                    console.log(error)
                 });
 
             return data
@@ -97,11 +103,18 @@ export const authSignup = (username, email, password1, password2) => {
                 .then(response => response.json())
                 .then((responseData) => {
                     const token = responseData.key;
-                    const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-                    localStorage.setItem('token', token);
-                    localStorage.setItem('expirationDate', expirationDate);
-                    dispatch(authSuccess(token));
-                    dispatch(checkAuthTimeOut(3600));
+                    if(token === undefined){
+                        dispatch(authFail(responseData))
+                        console.log(responseData);
+                    }
+                    else{
+                        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+                        localStorage.setItem('token', token);
+                        localStorage.setItem('expirationDate', expirationDate);
+                        dispatch(authSuccess(token));
+                        dispatch(checkAuthTimeOut(3600));
+                        console.log(responseData);
+                    }
                 })
                 .catch(error => {
                     dispatch(authFail(error))
