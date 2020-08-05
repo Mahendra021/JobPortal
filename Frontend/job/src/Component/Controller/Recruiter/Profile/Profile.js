@@ -5,7 +5,7 @@ export class Profile extends Component {
     render() {
         return (
             <div>
-                <ProfileView />
+                <ProfileView {...this.props} />
             </div>
         )
     }

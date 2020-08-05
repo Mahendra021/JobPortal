@@ -5,7 +5,7 @@ export class Education extends Component {
     render() {
         return (
             <div>
-                <EducationView />
+                <EducationView {...this.props} />
             </div>
         )
     }

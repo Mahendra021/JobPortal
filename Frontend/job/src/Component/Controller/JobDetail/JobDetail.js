@@ -11,7 +11,7 @@ export class JobDetail extends Component {
 
     render() {
         return (
-            <JobDetailView />
+            <JobDetailView {...this.props} />
         )
     }
 }

@@ -5,7 +5,7 @@ export class ProfileCopmletion extends Component {
     render() {
         return (
             <div>
-                <ProfileCopmletionView />
+                <ProfileCopmletionView {...this.props} />
             </div>
         )
     }

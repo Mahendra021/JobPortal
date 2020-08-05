@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { education } from '../../../Model/UserUploadData'
 import { userdata } from '../../../Model/UserData'
+import { Redirect } from 'react-router-dom' 
 import './Assets/register.css'
 import {createBrowserHistory} from 'history';
 
@@ -47,12 +48,16 @@ export class EducationView extends Component {
 
         console.log(this.state);
 
-        history.push("/home")
+        history.push("/")
         window.location.reload()
 
     }
 
     render() {
+
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/account/register/basicdetail" />;
+        }
         return (
             <div>
                 <div><h3 style={{ textAlign: 'center' }}>Job Search..</h3></div>

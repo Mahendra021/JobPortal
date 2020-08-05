@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Assets/Login.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../../../store/actions/auth'
 
@@ -16,6 +16,7 @@ export class LoginView extends React.Component {
     heandelsubmit() {
         console.log(this.state);
         this.props.onAuth(this.state.email, this.state.password)
+        return <Redirect to="/" />
     }
     logout() {
         this.props.logout()

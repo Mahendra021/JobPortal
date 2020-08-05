@@ -18,13 +18,13 @@ export class LoginView extends React.Component {
     }
     heandelsubmit() {
         this.props.onAuth(this.state.email, this.state.password)
-        return <Redirect to="/home" />
+        return <Redirect to="/" />
     }
 
     render() {
 
         if (this.props.isAuthenticated) {
-            return <Redirect to="/home" />;
+            return <Redirect to="/" />;
         }
         return (
             <div>

@@ -57,12 +57,36 @@ export const authLogin = (email, password) => {
                 .then(response => response.json())
                 .then((responseData) => {
                     const token = responseData.key;
-                    if(token === undefined){
-                        const error = responseData
-                        dispatch(authFail(error))
+                    if(token === undefined)
+                    {
+                        if(responseData.email && responseData.password){
+                            const error = { password:responseData.password , emails:responseData.email}
+                            dispatch(authFail(error))
+                            localStorage.setItem('error',error)
+                            console.log(1);
+                        }
+                        else if(responseData.email){
+                            const error = responseData.email
+                            dispatch(authFail(error))
+                            localStorage.setItem('error',error)
+                            console.log(2);
+                        }
+                        else if(responseData.password){
+                            const error = responseData.password
+                            dispatch(authFail(error))
+                            localStorage.setItem('error',error)
+                            console.log(3);
+                        }
+                        else{
+                            const error = responseData.non_field_errors
+                            dispatch(authFail(error))
+                            localStorage.setItem('error',error)
+                            console.log(4);
+                        }
                         console.log(responseData);
                     }
-                    else{
+                    else
+                    {
                         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
                         localStorage.setItem('token', token);
                         localStorage.setItem('expirationDate', expirationDate);
@@ -103,11 +127,14 @@ export const authSignup = (username, email, password1, password2) => {
                 .then(response => response.json())
                 .then((responseData) => {
                     const token = responseData.key;
-                    if(token === undefined){
+                    if(token === undefined)
+                    {
                         dispatch(authFail(responseData))
+                        localStorage.setItem('error',responseData)
                         console.log(responseData);
                     }
-                    else{
+                    else
+                    {
                         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
                         localStorage.setItem('token', token);
                         localStorage.setItem('expirationDate', expirationDate);
@@ -125,16 +152,25 @@ export const authSignup = (username, email, password1, password2) => {
 }
 
 export const authCheckState = () => {
+    
     return dispatch => {
+
         const token = localStorage.getItem('token');
-        if (token === undefined) {
+        
+        if (token === undefined)
+        {
             console.log(token)
             dispatch(logout());
-        } else {
+        }
+        else
+        {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()) {
+            if (expirationDate <= new Date())
+            {
                 dispatch(logout());
-            } else {
+            }
+            else
+            {
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeOut((expirationDate.getTime() - new Date().getTime()) / 1000));
             }

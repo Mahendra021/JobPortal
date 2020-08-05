@@ -5,7 +5,7 @@ export default class CompanyRegister extends Component {
     render() {
         return (
             <div>
-                <RegisterView />
+                <RegisterView {...this.props} />
             </div>
         )
     }

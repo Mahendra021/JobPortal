@@ -5,7 +5,7 @@ export class Register extends Component {
     render() {
         return (
             <div>
-                <RegisterView />
+                <RegisterView {...this.props} />
             </div>
         )
     }

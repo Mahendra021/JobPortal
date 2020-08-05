@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react'
 import { creatuser, creataddress, uploadresume } from '../../../Model/UserUploadData'
 import './Assets/register.css'
 import * as actions from '../../../../store/actions/auth'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {createBrowserHistory} from 'history';
 
@@ -70,6 +71,10 @@ export class RegisterView extends Component {
     }
 
     render() {
+        
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/" />;
+        }
         return (
             <div>
                 <div><h3 style={{ textAlign: 'center' }}>Job Search..</h3></div>

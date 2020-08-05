@@ -5,7 +5,7 @@ export class Post extends Component {
     render() {
         return (
             <div>
-                <PostView />
+                <PostView {...this.props} />
             </div>
         )
     }

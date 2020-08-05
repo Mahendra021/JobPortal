@@ -14,7 +14,7 @@ export class MapPage extends Component {
     render() {
         return (
             <div>
-                <MapPageView ref={this.mapRef} />
+                <MapPageView ref={this.mapRef} {...this.props} />
             </div>
         )
     }

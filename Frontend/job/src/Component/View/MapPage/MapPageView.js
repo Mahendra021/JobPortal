@@ -78,10 +78,17 @@ export class MapPageView extends Component {
 
         var url = window.location.search
         var params = queryString.parse(url)
+        var href = window.location.pathname
 
-        console.log(url)
+        console.log(href)
 
-        if(url === ''){
+        if(href === '/map'){
+            var data = await JobData()
+        }
+        else if(href === '/jobseeker'){
+            var data = await JobData()
+        }
+        else if(href === '/recommended'){
             var data = await JobData()
         }
         else{

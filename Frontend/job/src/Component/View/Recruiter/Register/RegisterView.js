@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Assets/register.css'
+import { Redirect } from 'react-router-dom'
 import { AddCompany } from '../../../Model/JobUploadData';
 
 export default class RegisterView extends Component {
@@ -32,6 +33,10 @@ export default class RegisterView extends Component {
     }
 
     render() {
+
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/" />;
+        }
         return (
             <div>
                 <div><h3 style={{ textAlign: 'center' }}>Job Search..</h3></div>
