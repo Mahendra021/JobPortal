@@ -74,4 +74,4 @@ class SuggestionSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = company
-        fields = ['id', 'name', 'job', 'xcoord', 'ycoord']
+        fields = ['id', 'name', 'job']

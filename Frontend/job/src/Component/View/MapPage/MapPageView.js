@@ -15,6 +15,9 @@ var globalThis = null
 var history = createBrowserHistory();
 
 export class MapPageView extends Component {
+
+    _isMounted = false
+
     constructor(props) {
         super(props)
 
@@ -36,10 +39,9 @@ export class MapPageView extends Component {
     addSource(source) {
 
         this.map.getSource('points').setData({
-            "type": "FeatureCollection",
-            "features": source
+            "type" : "FeatureCollection",
+            "features" : source
         });
-
     }
     getAdvBoundsData(MaxLongitude, MinLongitude, MaxLatitude, MinLatitude) // This Function Give Company List Filter As Current User Screen Boundry On Map Area
     {
@@ -68,6 +70,8 @@ export class MapPageView extends Component {
     }
 
     async componentDidMount() {
+
+        this._isMounted = true
 
         var map = new mapboxgl.Map({
             container: 'map', // container id
@@ -107,7 +111,10 @@ export class MapPageView extends Component {
             });
 
             map = AddMapSource(map);
-            globalThis.addSource(features);
+            if(this._isMounted){
+                globalThis.addSource(features);
+            }
+            
             AddLayer(map);
 
             var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
@@ -128,6 +135,10 @@ export class MapPageView extends Component {
 
             })
             document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+            if(document.getElementsByClassName("mapboxgl-ctrl-geocoder")[1]){
+                document.getElementsByClassName("mapboxgl-ctrl-geocoder")[1].style.display="none"
+            }
 
             map.on('click', 'clusters', function (e) // Cluster Click Event
             {
@@ -205,7 +216,7 @@ export class MapPageView extends Component {
                 popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
                     .setLngLat([longitude, latitude])
                     .setHTML('<div class="container">\
-                    <img src="images/'+ features[0].properties.img + '.jpg" class="popupimg"/>\
+                    <img src="/images/'+ features[0].properties.img + '.jpg" class="popupimg"/>\
                     <div id="text-block">'+ features[0].properties.name + '\
                     <p class ="title">Post : '+ features[0].properties.title + '<br/></p>\
                     <p class ="address">Address : '+ features[0].properties.add + ',' + features[0].properties.city + ',' + features[0].properties.state + ',</p>\
@@ -236,6 +247,10 @@ export class MapPageView extends Component {
 
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     renderListings(feature) {
         // Clear any existing listings
         var listingEl = document.getElementById('feature-listing');
@@ -253,7 +268,7 @@ export class MapPageView extends Component {
                     history.push("/JobDetail?id=" + feature.properties.id)
                     window.location.reload()
                 }
-                item.innerHTML = '<div class="mainHolder12" style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(0, 0, 0, 0.7)), url(' + "'" + 'images/' + feature.properties.img + '.jpg' + "'" + ');">\
+                item.innerHTML = '<div class="mainHolder12" style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(0, 0, 0, 0.7)), url(' + "'" + '/images/' + feature.properties.img + '.jpg' + "'" + ');">\
                 <div id="list-block">'+ feature.properties.name + '\
                 <p class="title">Post : '+ feature.properties.title + '<br/></p>\
                 <p class ="address">Address : '+ feature.properties.add + ',' + feature.properties.city + ',' + feature.properties.state + ',</p>\
@@ -270,7 +285,7 @@ export class MapPageView extends Component {
                     popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
                         .setLngLat([longitude, latitude])
                         .setHTML('<div class="container">\
-                        <img src="images/'+ feature.properties.img + '.jpg" class="popupimg"/>\
+                        <img src="/images/'+ feature.properties.img + '.jpg" class="popupimg"/>\
                         <div id="text-block">'+ feature.properties.name + '\
                         <p class ="title">Post : '+ feature.properties.title + '<br/></p>\
                         <p class ="address">Address : '+ feature.properties.add + ',' + feature.properties.city + ',' + feature.properties.state + ',</p>\
@@ -317,20 +332,20 @@ export class MapPageView extends Component {
                     {/*Map Zoom Element Code Start*/}
                     <div className='Zoommaindiv'>
                         <div onClick={() => hendelZoomIn.call(this,this.map)}>
-                            <img className="Zoomin" src="images/add.png" />
+                            <img className="Zoomin" src="/images/add.png" />
                         </div>
                         <div className="Location" onClick={() => hendelLacation.call(this,this.map)}>
-                            <img src="images/location.png" />
+                            <img src="/images/location.png" />
                         </div>
                         <div onClick={() => hendelZoomOut.call(this,this.map)}>
-                            <img className="Zoomout" src="images/reduce.png" />
+                            <img className="Zoomout" src="/images/reduce.png" />
                         </div>
                     </div>
                     {/*Map Zoom Element Code End*/}
 
                     <div>
                         <div className="Filtermain">
-                            <img className="filter" src="images/filter.png" />
+                            <img className="filter" src="/images/filter.png" />
                         </div>
                         <div className="Filterdiv">
                             <div className="filterlist">Experience
@@ -362,28 +377,28 @@ export class MapPageView extends Component {
 
                     {/* Map Style Change Code Start */}
                     <div className="Stylemaindiv">
-                        <img className="map" src="images/map.png" />
+                        <img className="map" src="/images/map.png" />
                     </div>
 
                     <div className='Stylediv'>
                         <div className='childitem' onClick={() => this.changeLayer(this.map,'streets-v11')}>
-                            <img className="Styleimg" src="images/Streets.png" />
+                            <img className="Styleimg" src="/images/Streets.png" />
                             <div style={{ textAlign: 'center' }}>Streets</div>
                         </div>
                         <div className='childitem' onClick={() => this.changeLayer(this.map,'light-v10')}>
-                            <img className="Styleimg" src="images/Light.png" />
+                            <img className="Styleimg" src="/images/Light.png" />
                             <div style={{ textAlign: 'center' }}>Light</div>
                         </div>
                         <div className='childitem' onClick={() => this.changeLayer(this.map,'dark-v10')}>
-                            <img className="Styleimg" src="images/Dark.png" />
+                            <img className="Styleimg" src="/images/Dark.png" />
                             <div style={{ textAlign: 'center' }}>Dark</div>
                         </div>
                         <div className='childitem' onClick={() => this.changeLayer(this.map,'outdoors-v11')}>
-                            <img className="Styleimg" src="images/Outdoors.png" />
+                            <img className="Styleimg" src="/images/Outdoors.png" />
                             <div style={{ textAlign: 'center' }}>Outdoors</div>
                         </div>
                         <div className='childitem' onClick={() => this.changeLayer(this.map,'satellite-v9')}>
-                            <img className="Styleimg" src="images/Satellite.png" />
+                            <img className="Styleimg" src="/images/Satellite.png" />
                             <div style={{ textAlign: 'center' }}>Satellite</div>
                         </div>
                     </div>

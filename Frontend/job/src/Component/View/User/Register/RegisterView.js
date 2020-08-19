@@ -20,53 +20,54 @@ export class RegisterView extends Component {
     }
     async hendelregister() {
 
-        console.log(this.state);
+        // console.log(this.state);
 
-        var jsonObject1 = {
-            fname: this.state.fname,
-            lname: this.state.lname,
-            email: this.state.email,
-            mobile: this.state.moblie
-        }
+        // var jsonObject1 = {
+        //     fname: this.state.fname,
+        //     lname: this.state.lname,
+        //     email: this.state.email,
+        //     mobile: this.state.moblie
+        // }
 
-        var userdata = await creatuser(jsonObject1)
-        var id = userdata.id
+        // var userdata = await creatuser(jsonObject1)
+        // var id = userdata.id
 
-        // console.log(id);
+        // // console.log(id);
 
-        var jsonObject2 = {
-            user_id: id,
-            fname: this.state.fname,
-            lname: this.state.lname,
-            local_addr: this.state.address,
-            local_area_name: this.state.area,
-            city: this.state.city,
-            state: this.state.state,
-            country: this.state.country,
-            pincode: this.state.pin
-        }
+        // var jsonObject2 = {
+        //     user_id: id,
+        //     fname: this.state.fname,
+        //     lname: this.state.lname,
+        //     local_addr: this.state.address,
+        //     local_area_name: this.state.area,
+        //     city: this.state.city,
+        //     state: this.state.state,
+        //     country: this.state.country,
+        //     pincode: this.state.pin
+        // }
 
-        var addressdata = await creataddress(jsonObject2)
+        // var addressdata = await creataddress(jsonObject2)
 
-        const jsonObject3 = new FormData()
-        jsonObject3.append('source', this.state.file, this.state.file.name);
-        jsonObject3.append('user_id', id);
+        // const jsonObject3 = new FormData()
+        // jsonObject3.append('source', this.state.file, this.state.file.name);
+        // jsonObject3.append('user_id', id);
 
-        // const jsonObject3 =  this.state.file
+        // // const jsonObject3 =  this.state.file
 
-        console.log(jsonObject3);
+        // console.log(jsonObject3);
 
-        var resume = await uploadresume(jsonObject3)
+        // var resume = await uploadresume(jsonObject3)
 
-        this.props.onAuth(
-            this.state.fname + this.state.lname,
-            this.state.email,
-            this.state.password1,
-            this.state.password2
-        )
+        // this.props.onAuth(
+        //     this.state.fname + this.state.lname,
+        //     this.state.email,
+        //     this.state.password1,
+        //     this.state.password2
+        // )
 
-        history.push('/account/register/education')
-        window.location.reload()
+        // history.push('/account/register/education')
+        // window.location.reload()
+        return <Redirect to="/account/register/education" />
 
     }
 

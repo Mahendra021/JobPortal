@@ -135,7 +135,7 @@ export async function hendelsalary(salary) {
 export function hendelHomeSearch(){
 
     var name = document.getElementById('suggestion').value
-    history.push('/?search=' + name)
+    history.push('map/?search=' + name)
     window.location.reload()
 
 }

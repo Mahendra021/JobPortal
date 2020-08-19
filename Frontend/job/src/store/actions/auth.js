@@ -21,7 +21,7 @@ export const authFail = error => {
 }
 
 export const logout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     return {
         type: actionType.AUTH_LOGOUT
@@ -59,31 +59,8 @@ export const authLogin = (email, password) => {
                     const token = responseData.key;
                     if(token === undefined)
                     {
-                        if(responseData.email && responseData.password){
-                            const error = { password:responseData.password , emails:responseData.email}
-                            dispatch(authFail(error))
-                            localStorage.setItem('error',error)
-                            console.log(1);
-                        }
-                        else if(responseData.email){
-                            const error = responseData.email
-                            dispatch(authFail(error))
-                            localStorage.setItem('error',error)
-                            console.log(2);
-                        }
-                        else if(responseData.password){
-                            const error = responseData.password
-                            dispatch(authFail(error))
-                            localStorage.setItem('error',error)
-                            console.log(3);
-                        }
-                        else{
-                            const error = responseData.non_field_errors
-                            dispatch(authFail(error))
-                            localStorage.setItem('error',error)
-                            console.log(4);
-                        }
-                        console.log(responseData);
+                        const error = responseData
+                        dispatch(authFail("Invalid details. Please check the Email ID - Password combination.",error))
                     }
                     else
                     {

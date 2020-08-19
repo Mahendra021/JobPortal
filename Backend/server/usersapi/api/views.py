@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-
+from rest_framework import permissions
 from rest_framework import serializers
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -14,14 +14,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     serializer_class = UserSerializer
     queryset = Jobseeker.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {'owner': ['exact']}
+    # permission_classes = [permissions.IsAuthenticated]
 
 
-class ResumeViewSet(viewsets.ModelViewSet):
+class SourceViewSet(viewsets.ModelViewSet):
 
     parser_classes = (MultiPartParser, FormParser)
 
-    serializer_class = ResumeSerializer
-    queryset = Resume.objects.all()
+    serializer_class = SourceSerializer
+    queryset = Source.objects.all()
 
     def post(self, request, *args, **kwargs):
         posts_serializer = PostSerializer(data=request.data)

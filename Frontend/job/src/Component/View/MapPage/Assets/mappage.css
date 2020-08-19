@@ -10,7 +10,7 @@
     position: absolute;
     z-index: 1;
     width: 33.1%;
-    top: 0%;
+    top: 6.4%;
     right: 11%;
 }
 .mapboxgl-ctrl-geocoder {
@@ -310,7 +310,7 @@ li {
     position: absolute;
     width: 34.85%;
     margin-left: 1px;
-    top: 46px;
+    top: 90px;
     z-index: 1;
 }
 .suggestionbox{

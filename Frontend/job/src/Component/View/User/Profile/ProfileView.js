@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { userdata, useraddress, usersource,higher_education } from '../../../Model/UserData';
+import { Redirect } from 'react-router-dom'
+import { userdata, useraddress, usersource, higher_education, ownerdata } from '../../../Model/UserData';
 import { JobIdData } from '../../../Model/JobData';
 import '../Profile/Assets/profile.css'
 
@@ -15,21 +16,24 @@ export class ProfileView extends Component {
         }
     }
 
-    async componentWillMount(){
+    async componentDidMount(){
 
-        var user = await userdata(1)
+        var token = localStorage.getItem('token')
+        var owner = await ownerdata(token)
+        var pk = owner.pk
+        var user = await userdata(pk,token)
         var address = await useraddress()
         var link = await usersource()
         var higher = await higher_education()
         var jobs = await JobIdData(1)
         this.setState({
-            user: user,
+            user: user[0],
             address:address,
             link:link,
             higher:higher,
             jobs:jobs
         });
-
+        console.log(this.state);
     }
 
     hendelQuickLink(id){
@@ -43,10 +47,16 @@ export class ProfileView extends Component {
     }
 
     render() {
+        // if (this.props.isAuthenticated===false) {
+        //     return <Redirect to="/user" />;
+        // }
         return (
             <div>
                 <ul>
                     <li className="listCompany">Name</li>
+                    <li key="2" id="logout" onClick={this.props.logout}>
+                        <div>Logout</div>
+                    </li>
                 </ul>
                 <div className="waper">
                     <div className="mainDetail4">

@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import Profile from './Component/Controller/Recruiter/Profile/Profile'
 import JobSeeker from './Component/Controller/User/Profile/Profile'
 import Home from './Component/Controller/Home/Home'
+import UserHome from './Component/Controller/Home/UserHome'
 var history = createBrowserHistory();
 
 export class Routers extends Component {
@@ -29,6 +30,7 @@ export class Routers extends Component {
                 <div>
                     <Switch>
                         <Route exact path='/'                                       component={() => <Home {...this.props}/>} />
+                        <Route exact path='/user'                                   component={() => <UserHome {...this.props}/>} />
                         <Route exact path='/map'                                    component={() => <MapPage {...this.props} />} />
                         <Route exact path='/jobseeker'                              component={() => <MapPage {...this.props} />} />
                         <Route exact path='/recommended'                            component={() => <MapPage {...this.props} />} />

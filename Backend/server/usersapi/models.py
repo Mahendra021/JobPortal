@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
@@ -22,7 +22,7 @@ class Jobseeker(models.Model):
         ('Both', 'Both'),
     )
 
-    # owner = models.OneToOneField(User related_name='jobseeker' on_delete=models.CASCADE)
+    owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='jobseeker', on_delete=models.CASCADE)
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
@@ -44,8 +44,8 @@ class Jobseeker(models.Model):
 
 class Address(models.Model):
 
-    jobseeker_id = models.ForeignKey(
-        Jobseeker, related_name="address", on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="address", on_delete=models.CASCADE)
     local_addr = models.TextField()
     local_area_name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
@@ -73,8 +73,8 @@ class Higher_Education(models.Model):
         ('Correspondence', 'Correspondence')
     )
 
-    jobseeker_id = models.ForeignKey(
-        Jobseeker, related_name="high_education", on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="high_education", on_delete=models.CASCADE)
     qualification = models.CharField(max_length=50, choices=STUDY_CHOICES)
     course = models.CharField(max_length=50)
     specialization = models.CharField(max_length=50)
@@ -95,8 +95,8 @@ class Education(models.Model):
         ('Below 10th', 'Below 10th')
     )
 
-    jobseeker_id = models.ForeignKey(
-        Jobseeker, related_name="education", on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="education", on_delete=models.CASCADE)
     qualification = models.CharField(max_length=50, choices=STUDY_CHOICES)
     Board = models.CharField(max_length=50)
     yerar_of_passing = models.CharField(max_length=4)
@@ -109,17 +109,17 @@ class Education(models.Model):
 
 class Skill(models.Model):
 
-    jobseeker_id = models.ForeignKey(
-        Jobseeker, related_name='skill', on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='skill', on_delete=models.CASCADE)
     skill = models.CharField(max_length=50)
 
     def __str__(self):
         return self.skill
 
 
-class Resume(models.Model):
+class Source(models.Model):
 
-    jobseeker_id = models.ForeignKey(
-        Jobseeker, related_name='resume', on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='source', on_delete=models.CASCADE)
     source = models.FileField(upload_to='Resume')
     profile = models.ImageField(blank=True, null=True, upload_to='Image')

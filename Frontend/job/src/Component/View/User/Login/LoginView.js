@@ -18,13 +18,25 @@ export class LoginView extends React.Component {
     }
     heandelsubmit() {
         this.props.onAuth(this.state.email, this.state.password)
-        return <Redirect to="/" />
-    }
 
+        if(document.getElementById("error")){
+            var error = document.getElementById("error")
+            error.remove()
+            console.log(5);
+        }
+        if(this.props.isAuthenticated === false){
+            var error = document.createElement("p")
+            console.log(6);
+            error.id = "error"
+            error.innerHTML = "Invalid details. Please check the Email ID - Password combination."
+            document.getElementById("err").appendChild(error)
+        }
+
+    } 
     render() {
 
         if (this.props.isAuthenticated) {
-            return <Redirect to="/" />;
+            return <Redirect to="/user" />;
         }
         return (
             <div>
@@ -42,6 +54,7 @@ export class LoginView extends React.Component {
                                 <div>Hello!</div>
                                 <div>Welcome Back</div>
                             </h3>
+                            <div id="err"></div>
                             <div className="user">
                                 <input type='txet' placeholder="User/E-mail" onChange={(e) => { this.setState({ email: e.target.value }) }}></input>
                             </div>

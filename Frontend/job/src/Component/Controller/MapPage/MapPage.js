@@ -14,6 +14,12 @@ export class MapPage extends Component {
     render() {
         return (
             <div>
+                <ul style={{ borderBottom :'1px solid',height:'49px' }}>
+                    <li className="listCompany">Name</li>
+                    <li key="2" id="logout" onClick={this.props.logout}>
+                        <div>Logout</div>
+                    </li>
+                </ul>
                 <MapPageView ref={this.mapRef} {...this.props} />
             </div>
         )

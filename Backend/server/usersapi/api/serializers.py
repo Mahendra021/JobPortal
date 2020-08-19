@@ -2,9 +2,9 @@ from rest_framework import serializers
 from usersapi.models import *
 
 
-class ResumeSerializer(serializers.ModelSerializer):
+class SourceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Resume
+        model = Source
         fields = "__all__"
 
 
@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserAllSerializer(serializers.ModelSerializer):
 
-    resume = ResumeSerializer(many=True)
+    resume = SourceSerializer(many=True)
     skill = SkillSerializer(many=True)
     education = EducationSerializer(many=True)
     higher_education = High_EducationSerializer(many=True)

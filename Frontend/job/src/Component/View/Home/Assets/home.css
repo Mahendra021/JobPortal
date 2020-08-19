@@ -1,7 +1,11 @@
-.homesearch{
+.home{
     width: 961px;
     margin: 25px auto 0px;
 }
+/* .homesearch{
+    width: 961px;
+    margin: 25px auto 0px;
+} */
 .homesearch samp{
     font-size: 25px;
     font-weight: 600;
@@ -78,4 +82,19 @@
     padding: 5px 12px;
     color: white;
     background-color: #0d8c2b;
+}
+#logout{
+    float: right;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-top: 7px;
+}
+#login{
+    float: right;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-top: 7px;
+}
+#login a{
+    color: white;
 }

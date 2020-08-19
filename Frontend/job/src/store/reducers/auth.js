@@ -3,14 +3,14 @@ import { updateObject } from '../utility'
 
 const initialStaet = {
     token: null,
-    erroe: null,
-    loding: false
+    error: null,
+    loading: false
 }
 
 const authStart = (state, action) => {
     return updateObject(state, {
         error: null,
-        loding: true
+        loading: true
     });
 }
 
@@ -18,14 +18,15 @@ const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.token,
         error: null,
-        loding: false
+        loading: false
     });
 }
 
 const authFail = (state, action) => {
     return updateObject(state, {
-        error: action.erroe,
-        loding: false
+        error: action.error,
+        loading: false,
+        token: null
     })
 }
 

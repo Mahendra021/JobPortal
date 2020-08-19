@@ -10,6 +10,6 @@ router.register(r'higher_education', High_EducationViewSet,
                 basename='higher_education')
 router.register(r'education', EducationViewSet, basename='education')
 router.register(r'skill', SkillViewSet, basename='skill')
-router.register(r'resume', ResumeViewSet, basename='resume')
+router.register(r'source', SourceViewSet, basename='source')
 
 urlpatterns = router.urls
