@@ -54,6 +54,8 @@ class CopmanyViewSet(viewsets.ModelViewSet):
 
     serializer_class = CompanySerializer
     queryset = company.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {'owner': ['exact']}
 
 
 class JobViewSet(viewsets.ModelViewSet):

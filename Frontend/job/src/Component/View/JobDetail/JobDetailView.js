@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import queryString from 'query-string'
+import { Redirect } from "react-router-dom"
 import './Assets/jobdetail.css'
 import { Link} from 'react-router-dom'
 import { JobIdData } from '../../Model/JobData'
@@ -25,6 +26,9 @@ export class JobDetailView extends Component {
     }
 
     render() {
+        if (this.props.isAuthenticated===false) {
+            return <Redirect to="/" />;
+        }
         return (
             <div>
                 <ul>

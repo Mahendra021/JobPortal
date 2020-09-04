@@ -37,13 +37,17 @@ export const checkAuthTimeOut = expirationDate => {
 }
 
 export const authLogin = (email, password) => {
+
     return dispatch => {
+
         dispatch(authStart());
 
-        AuthLogin(email, password)
+        var data =  AuthLogin(email, password)
 
         async function AuthLogin(email, password) {
-            var data = await fetch("http://localhost:8000/rest-auth/login/", {
+            
+            var data
+            await fetch("http://localhost:8000/rest-auth/login/", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -57,6 +61,7 @@ export const authLogin = (email, password) => {
                 .then(response => response.json())
                 .then((responseData) => {
                     const token = responseData.key;
+                    data = responseData.key
                     if(token === undefined)
                     {
                         const error = responseData
@@ -69,7 +74,6 @@ export const authLogin = (email, password) => {
                         localStorage.setItem('expirationDate', expirationDate);
                         dispatch(authSuccess(token));
                         dispatch(checkAuthTimeOut(3600));
-                        console.log(responseData);
                     }
                 })
                 .catch(error => {
@@ -78,16 +82,20 @@ export const authLogin = (email, password) => {
 
             return data
         }
+
+        return data
     }
 }
 
-export const authSignup = (username, email, password1, password2) => {
+export const authSignup = (username, email, usertype, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
 
-        AuthSignup(username, email, password1, password2)
+         var data = AuthSignup(username, email, usertype, password1, password2)
 
-        async function AuthSignup(username, email, password1, password2) {
+        async function AuthSignup(username, email, usertype, password1, password2) {
+
+            var data
             await fetch("http://localhost:8000/rest-auth/registration/", {
                 method: 'POST',
                 headers: {
@@ -97,6 +105,7 @@ export const authSignup = (username, email, password1, password2) => {
                 body: JSON.stringify({
                     username: username,
                     email: email,
+                    user_type : usertype,
                     password1: password1,
                     password2: password2
                 })
@@ -104,10 +113,10 @@ export const authSignup = (username, email, password1, password2) => {
                 .then(response => response.json())
                 .then((responseData) => {
                     const token = responseData.key;
+                    data = responseData.key
                     if(token === undefined)
                     {
                         dispatch(authFail(responseData))
-                        localStorage.setItem('error',responseData)
                         console.log(responseData);
                     }
                     else
@@ -117,14 +126,18 @@ export const authSignup = (username, email, password1, password2) => {
                         localStorage.setItem('expirationDate', expirationDate);
                         dispatch(authSuccess(token));
                         dispatch(checkAuthTimeOut(3600));
-                        console.log(responseData);
+                        console.log(responseData)                       
                     }
                 })
                 .catch(error => {
                     dispatch(authFail(error))
                     console.log(error)
                 });
+
+                return data
         }
+
+        return data
     }
 }
 

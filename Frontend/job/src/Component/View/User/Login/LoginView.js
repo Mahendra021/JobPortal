@@ -3,39 +3,70 @@ import './Assets/Login.css'
 import { NavLink,Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../../../store/actions/auth'
+import { ownerdata } from '../../../Model/UserData'
 import {createBrowserHistory} from 'history';
 
 var history = createBrowserHistory()
 
 export class LoginView extends React.Component {
+
+    _isMounted = false
+
     constructor(props) {
         super(props)
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            user_type: ''
         }
     }
-    heandelsubmit() {
-        this.props.onAuth(this.state.email, this.state.password)
+
+    componentDidMount(){
+        this._isMounted = true
+    }
+    componentWillUnmount(){
+        this._isMounted = false
+    }
+    async heandelsubmit() {
+
+        var user = await this.props.onAuth(this.state.email, this.state.password)
+        var owner = await ownerdata(user)
+
+        this.setState({
+            user_type: owner.user_type
+        })
 
         if(document.getElementById("error")){
             var error = document.getElementById("error")
             error.remove()
             console.log(5);
         }
-        if(this.props.isAuthenticated === false){
+
+        if(owner.user_type !== "Jobseeker"){
             var error = document.createElement("p")
             console.log(6);
             error.id = "error"
-            error.innerHTML = "Invalid details. Please check the Email ID - Password combination."
+            if(owner.email === undefined){
+                error.innerHTML = "Invalid details. Please check the Email ID - Password combination."
+            }
+            else if(owner.user_type !== "Jobseeker"){
+                error.innerHTML = "Invalid details. Please check the Email ID - Password combination. or You are using company account"
+                this.props.logout()
+            }          
             document.getElementById("err").appendChild(error)
+        }
+        if(!document.getElementById("error")){
+            history.push("/user")
+            window.location.reload()
         }
 
     } 
     render() {
-
-        if (this.props.isAuthenticated) {
+        if (this.state.user_type === "Jobseeker") {
+            this.setState({
+                user_type: ""
+            })
             return <Redirect to="/user" />;
         }
         return (
@@ -86,7 +117,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password) => dispatch(actions.authLogin(email, password)),
-        
+        logout: () => dispatch(actions.logout())        
     }
 }
 

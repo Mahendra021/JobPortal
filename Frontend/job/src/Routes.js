@@ -29,21 +29,23 @@ export class Routers extends Component {
             <Router history={history}>
                 <div>
                     <Switch>
-                        <Route exact path='/'                                       component={() => <Home {...this.props}/>} />
-                        <Route exact path='/user'                                   component={() => <UserHome {...this.props}/>} />
-                        <Route exact path='/map'                                    component={() => <MapPage {...this.props} />} />
-                        <Route exact path='/jobseeker'                              component={() => <MapPage {...this.props} />} />
-                        <Route exact path='/recommended'                            component={() => <MapPage {...this.props} />} />
-                        <Route exact path='/account/register/basicdetail'           component={() => <Register {...this.props} />} />
-                        <Route exact path='/account/register/education'             component={() => <Education {...this.props} />} />
-                        <Route exact path='/account/register/profilecompletion'     component={() => <ProfileCompletion {...this.props} />} />
-                        <Route exact path='/login'                                  component={() => <Login {...this.props}/>} />
-                        <Route exact path='/company/register'                       component={() => <CompanyRegister {...this.props} />} />
-                        <Route exact path='/recruit/login'                          component={() => <RecruitLogin {...this.props} />} />
-                        <Route exact path='/jobpost'                                component={() => <Post {...this.props} />} />
-                        <Route exact path='/compnay/profile'                        component={() => <Profile {...this.props} />} />
-                        <Route exact path='/JobDetail'                              component={() => <JobDetail {...this.props} />} />
-                        <Route exact path='/jobseeker/profile'                      component={() => <JobSeeker {...this.props} />}/>
+                        <Route exact path='/'                                       component={() => <Home              {...this.props}/>} />
+                        <Route exact path='/user'                                   component={() => <UserHome          {...this.props}/>} />
+                        <Route exact path='/map'                                    component={() => <MapPage           {...this.props} />} />
+                        <Route exact path='/recommended'                            component={() => <MapPage           {...this.props} />} />
+                        <Route exact path='/jobseeker'                              component={() => <MapPage           {...this.props} />} />
+                        <Route exact path='/account/register/basicdetail'           component={() => <Register          {...this.props} />} />
+                        <Route exact path='/account/register/education'             component={() => <Education         {...this.props} />} />
+                        <Route exact path='/account/register/profile'               component={() => <ProfileCompletion {...this.props} />} />
+                        <Route exact path='/login'                                  component={() => <Login             {...this.props}/>} />
+                        <Route exact path='/company/register'                       component={() => <CompanyRegister   {...this.props} />} />
+                        <Route exact path='/recruit/login'                          component={() => <RecruitLogin      {...this.props} />} />
+                        <Route exact path='/jobpost'                                component={() => <Post              {...this.props} />} />
+                        <Route exact path='/company'                                component={() => <Profile           {...this.props} />} />
+                        <Route exact path='/JobDetail'                              component={() => <JobDetail         {...this.props} />} />
+                        <Route exact path='/company/profile'                        component={() => <Profile           {...this.props} />} />
+                        <Route exact path='/PostDetail'                             component={() => <JobDetail         {...this.props} />} />
+                        <Route exact path='/jobseeker/profile'                      component={() => <JobSeeker         {...this.props} />}/>
                     </Switch>
                 </div>
             </Router>

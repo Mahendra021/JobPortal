@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect,withRouter } from 'react-router-dom'
 import { userdata, useraddress, usersource, higher_education, ownerdata } from '../../../Model/UserData';
+import { connect } from 'react-redux';
+import * as actions from '../../../../store/actions/auth'
+import {updatesource} from '../../../Model/UserUploadData'
 import { JobIdData } from '../../../Model/JobData';
 import '../Profile/Assets/profile.css'
 
 export class ProfileView extends Component {
+
+    _isMounted = false
 
     constructor(props) {
         super(props)
@@ -18,22 +23,32 @@ export class ProfileView extends Component {
 
     async componentDidMount(){
 
+        this._isMounted = true
+
         var token = localStorage.getItem('token')
         var owner = await ownerdata(token)
-        var pk = owner.pk
+        var pk = owner.id
+        // console.log(owner);
+        // var pk = 27
+        // var token = "efbe436531df4ce612267722476310f6b062fc86"
         var user = await userdata(pk,token)
-        var address = await useraddress()
-        var link = await usersource()
-        var higher = await higher_education()
+        var address = await useraddress(pk)
+        var link = await usersource(pk)
+        var higher = await higher_education(pk)
         var jobs = await JobIdData(1)
-        this.setState({
-            user: user[0],
-            address:address,
-            link:link,
-            higher:higher,
-            jobs:jobs
-        });
-        console.log(this.state);
+        if(this._isMounted){   
+            this.setState({
+                user: user[0],
+                address:address[0],
+                link:link[0],
+                higher:higher,
+                jobs:jobs
+            });
+        }
+    }
+    
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     hendelQuickLink(id){
@@ -45,11 +60,39 @@ export class ProfileView extends Component {
             inline: "nearest"
           });
     }
+    async hendelresume(file){
+
+        var token = localStorage.getItem('token')
+        var owner = await ownerdata(token)
+        var pk = owner.id
+
+        const jsonObject3 = new FormData()
+        jsonObject3.append('source', file, file.name);
+        jsonObject3.append('owner', pk)
+
+        var id = this.state.link.id
+        var upload = await updatesource(id,jsonObject3)
+    }
+    async hendelprofile(file){
+
+        var token = localStorage.getItem('token')
+        var owner = await ownerdata(token)
+        var pk = owner.id
+
+        console.log(file.name);
+
+        const jsonObject3 = new FormData()
+        jsonObject3.append('profile', file, file.name);
+        jsonObject3.append('owner', pk)
+
+        var id = this.state.link.id
+        var upload = await updatesource(id,jsonObject3)
+    }
 
     render() {
-        // if (this.props.isAuthenticated===false) {
-        //     return <Redirect to="/user" />;
-        // }
+        if (localStorage.getItem('token')===null) {
+            return <Redirect to="/" />
+        }
         return (
             <div>
                 <ul>
@@ -60,13 +103,18 @@ export class ProfileView extends Component {
                 </ul>
                 <div className="waper">
                     <div className="mainDetail4">
-                        <img className="userprofile" src={this.state.link.length !== 0 ? this.state.link[0].profile : null}></img>
+                        <input className="profilechenge" type='file' accept="image/*" onChange={(e)=>this.hendelprofile(e.target.files[0])} />
+                        {
+                            this.state.link.profile === null ?
+                            <img className="userprofile" src="/images/Default-Profile.png"></img>:
+                            <img className="userprofile" src={this.state.link.profile}></img>
+                        }
                         <div style={{float:"left",marginLeft:"15px"}}>
                             <div style={{height:"60px"}}>{this.state.user.fname}</div>
                             <div>
                                 <div style={{float:"left",width:"250px"}}>
-                                    location : {this.state.address.length !==0 ? this.state.address[0].city : null},
-                                    {this.state.address.length !==0 ? this.state.address[0].country : null}
+                                    location : {this.state.address.city},
+                                    {this.state.address.country}
                                 </div>
                                 <div style={{float:"left"}}>
                                     Phone : {this.state.user.mobile}
@@ -132,18 +180,21 @@ export class ProfileView extends Component {
                                 <div style={{marginBottom:"15px",fontSize:'14px'}}>Resume is the most important document recruiters look for.
                                     Recruiters generally do not look at profiles without resumes.
                                 </div>
+                                {
+                                    this.state.link.source !== null ?
+                                    <div>
+                                        <samp>Resuem</samp>
+                                        <samp style={{float:"right"}}>
+                                            <a href={this.state.link.source} download="Resume">Download</a> 
+                                        </samp>
+                                    </div>
+                                    :
+                                    null
+                                } 
                                 <div className="resume">
                                     <button className="CVupload">Upload Resume</button>
-                                    <input type='file' name="Upload Resume" />
+                                    <input type='file' accept=".docx,.doc,.rtf,.pdf" name="Upload Resume" onChange={(e)=>this.hendelresume(e.target.files[0])} />
                                     <div>Supported Formats: doc, docx, rtf, pdf, upto 2 MB</div>
-                                </div>
-                                <div style={{textAlign:"center"}}>
-                                    <div className="separator">
-                                        <samp></samp>
-                                        Or
-                                        <samp></samp>
-                                    </div>
-                                    <div style={{fontSize:"13px"}}>If you do not have a resume document, you may write your brief professional profile here</div>
                                 </div>
                             </div>
                             <div className="subdiv2" id='headline'>
@@ -154,7 +205,7 @@ export class ProfileView extends Component {
                                 <div style={{fontSize:"14px",margin:"10px 0px"}}>
                                     Jobseeker with {this.state.higher.length!== 0 ? this.state.higher[0].course : null} in <></>   
                                     {this.state.higher.length!== 0 ? this.state.higher[0].specialization : null} currently living 
-                                    in {this.state.address.length !==0 ? this.state.address[0].city : null}
+                                    in {this.state.address.city}
                                 </div>
                             </div>
                             <div className="subdiv2" id='skill'>
@@ -226,4 +277,10 @@ export class ProfileView extends Component {
     }
 }
 
-export default ProfileView
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(actions.logout()) 
+    }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(ProfileView));

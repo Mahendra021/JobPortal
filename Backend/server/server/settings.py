@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
 
-    # 'knox',
     'jobapi',
     'usersapi',
     'accounts',
@@ -167,6 +166,14 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.FileUploadParser',
     ]
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+}
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "accounts.serializers.CustomUserDetailsSerializer",
+    # 'LOGIN_SERIALIZER': 'accounts.serializers.CustomLoginSerializer',
 }
 
 CORS_ORIGIN_ALLOW_ALL = True

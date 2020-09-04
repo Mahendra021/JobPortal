@@ -11,6 +11,12 @@ export default class HomeView extends Component {
             <div>
                 <ul>
                     <li className="listCompany">Name</li>
+                    <li id="login" style={{paddingTop:'6px'}}>
+                        <Link className="employerlogin" to='/recruit/login'>FOR EMPLOYER</Link>
+                    </li>
+                    <li key="1" id="register">
+                        <Link to="/account/register/basicdetail">Register</Link>
+                    </li>
                     <li key="2" id="login">
                         <Link to="/login">Login</Link>
                     </li>

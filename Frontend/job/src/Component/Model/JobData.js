@@ -49,3 +49,51 @@ export async function RecommandData(salary, experience, skill){
     return data;
 
 }
+
+export async function CompanyData(pk){
+    
+    var data = await fetch("http://localhost:8000/jobapi/copmany/?owner="+pk)
+        .then(response => response.json())
+        .then(result => {
+            return result
+        })
+
+    return data;
+
+}
+
+export async function AddressData(){
+    
+    var data = await fetch("http://localhost:8000/jobapi/address/")
+        .then(response => response.json())
+        .then(result => {
+            return result
+        })
+
+    return data;
+
+}
+
+export async function PostData(){
+    
+    var data = await fetch("http://localhost:8000/jobapi/post/")
+        .then(response => response.json())
+        .then(result => {
+            return result
+        })
+
+    return data;
+
+}
+
+export async function ImageSource(){
+
+    var data = await fetch("http://localhost:8000/jobapi/image/")
+        .then(response => response.json())
+        .then(result => {
+            return result
+        })
+
+    return data;
+
+}

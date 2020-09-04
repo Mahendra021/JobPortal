@@ -31,19 +31,19 @@ export class UserHomeView extends Component {
 
         var token = localStorage.getItem('token')
         var owner = await ownerdata(token)
-        var pk = owner.pk
+        var pk = owner.id
         var user = await userdata(pk,token)
-        var address = await useraddress()
-        var link = await usersource()
-        var higher = await higher_education()
+        var address = await useraddress(pk)
+        var link = await usersource(pk)
+        var higher = await higher_education(pk)
         var edu = await education()
         var jobs = await JobIdData(1)
 
         if(this._isMounted){
             this.setState({
-                user: user,
+                user: user[0],
                 address:address,
-                link:link,
+                link:link[0],
                 higher:higher,
                 edu:edu,
                 jobs:jobs,
@@ -58,7 +58,7 @@ export class UserHomeView extends Component {
     }
 
     render() {
-        if (this.props.isAuthenticated === false) {
+        if (this.props.isAuthenticated===false) {
             return <Redirect to="/" />;
         }
         return (
@@ -67,6 +67,9 @@ export class UserHomeView extends Component {
                     <li className="listCompany">Name</li>  
                     <li key="2" id="logout" onClick={this.props.logout}>
                         <div>Logout</div>
+                    </li>
+                    <li id="logout">
+                        <Link to="/map">Eaploar in Map</Link>
                     </li>
                 </ul>
                 <div className="home">
@@ -118,7 +121,11 @@ export class UserHomeView extends Component {
                     </div>
                     <div style={{float:"left",width:'28.4%',marginLeft:'25px',paddingTop:'37px'}}>
                         <div className="profile1">
-                            <img className="userprofile" src={this.state.link.length !== 0 ? this.state.link[0].profile : null} onClick={()=> hendelprofile.call(this,this.state.user.id)} />
+                            {
+                                this.state.link.profile === null ?
+                                <img className="userprofile" src="/images/Default-Profile.png"></img>:
+                                <img className="userprofile" src={this.state.link.profile}></img>
+                            }
                             <div style={{textAlign:"center"}} onClick={()=> hendelprofile.call(this,this.state.user.id)}>{this.state.user.fname}</div>
                             <div style={{textAlign:"center"}} onClick={()=> hendelprofile.call(this,this.state.user.id)}>
                                 {this.state.higher.length!== 0 ? this.state.higher[0].course : null} <></>

@@ -5,7 +5,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username=None, password=None, is_staff=False, is_admin=False, is_active=True):
+    def create_user(self, email, user_type, username=None, password=None, is_staff=False, is_admin=False, is_active=True):
 
         if not email:
             raise ValueError("Users must have Email address")
@@ -14,6 +14,7 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
+            user_type=user_type,
             username=username
         )
         user.set_password(password)
@@ -48,10 +49,18 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
 
+    USER_TYPE_CHOICES = (
+        ('Jobseeker', 'Jobseeker'),
+        ('Company', 'Company'),
+        ('Admin', 'Admin')
+    )
+
     email = models.EmailField(max_length=254, unique=True)
     username = models.CharField(max_length=50, blank=True, null=True)
     first_name = None
     last_name = None
+    user_type = models.CharField(
+        max_length=50, choices=USER_TYPE_CHOICES)
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
@@ -59,7 +68,7 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['user_type']
 
     object = UserManager()
 

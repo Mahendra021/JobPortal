@@ -28,33 +28,44 @@
     width: 26%;
     text-align: right;
     padding-right: 15px;
-    margin: 0px;
+    margin: 11px;
+    float: left;
 }
 .middle{
-    width: 47%;
+    display: block;
+    float: left;
+    width: 70%;
+    margin-bottom: 12px;
+}
+.middelinput{
+    width: 65.4%;
     border: 1px solid #DFDFDF;
     padding: 10px;
+}
+.err{
+    color: red;
+    font-size: 12px;
 }
 .mandatory:after {
     content: '*';
     color: #ED2D2C;
 }
 .address1{
-    width: 47%;
+    width: 65.4%;
     border: 1px solid #DFDFDF;
     padding: 10px;
 }
 .address2{
-    width: 23%;
+    width: 32%;
     border: 1px solid #DFDFDF;
     padding: 10px;
-    margin: 10px 11px 0 0;
+    margin-right: 10px;
 }
 .address3{
-    width: 23%;
+    width: 32%;
     border: 1px solid #DFDFDF;
     padding: 10px;
-    margin: 10px 11px 0 0;
+    margin-right: 10px;
 }
 .uplode-CV {
     display: inline-block;
@@ -129,4 +140,31 @@
     left: 0px;
     border: 1px solid #DFDFDF;
     text-align: center;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.mapview{
+    position: relative;
+    display: block;
+}
+#map1{
+    position: absolute;
+    min-width: 800px;
+    max-width: 800px;
+    max-height: 525px;
+    min-height: 525px;
+    left: 100px;
+}
+.cordinet{
+    width: 32%;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+    margin-right: 10px;
 }

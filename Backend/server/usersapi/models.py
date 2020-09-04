@@ -46,6 +46,8 @@ class Address(models.Model):
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="address", on_delete=models.CASCADE)
+    jobseeker = models.ForeignKey(
+        Jobseeker, related_name="address", on_delete=models.CASCADE,null=True)
     local_addr = models.TextField()
     local_area_name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
@@ -75,6 +77,8 @@ class Higher_Education(models.Model):
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="high_education", on_delete=models.CASCADE)
+    jobseeker = models.ForeignKey(
+        Jobseeker, related_name="high_education", on_delete=models.CASCADE,null=True)
     qualification = models.CharField(max_length=50, choices=STUDY_CHOICES)
     course = models.CharField(max_length=50)
     specialization = models.CharField(max_length=50)
@@ -97,6 +101,8 @@ class Education(models.Model):
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="education", on_delete=models.CASCADE)
+    jobseeker = models.ForeignKey(
+        Jobseeker, related_name="education", on_delete=models.CASCADE,null=True)
     qualification = models.CharField(max_length=50, choices=STUDY_CHOICES)
     Board = models.CharField(max_length=50)
     yerar_of_passing = models.CharField(max_length=4)
@@ -111,6 +117,8 @@ class Skill(models.Model):
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='skill', on_delete=models.CASCADE)
+    jobseeher = models.ForeignKey(
+        Jobseeker, related_name="skill", on_delete=models.CASCADE,null=True)
     skill = models.CharField(max_length=50)
 
     def __str__(self):
@@ -121,5 +129,7 @@ class Source(models.Model):
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='source', on_delete=models.CASCADE)
-    source = models.FileField(upload_to='Resume')
+    jobseeker = models.ForeignKey(
+        Jobseeker, related_name="source", on_delete=models.CASCADE,null=True)
+    source = models.FileField(blank=True, null=True, upload_to='Resume')
     profile = models.ImageField(blank=True, null=True, upload_to='Image')

@@ -40,12 +40,21 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserAllSerializer(serializers.ModelSerializer):
 
-    resume = SourceSerializer(many=True)
+    source = SourceSerializer(many=True)
     skill = SkillSerializer(many=True)
     education = EducationSerializer(many=True)
-    higher_education = High_EducationSerializer(many=True)
+    high_education = High_EducationSerializer(many=True)
     address = AddressSerializer(many=True)
 
     class Meta:
         model = Jobseeker
         fields = "__all__"
+
+
+class SuggestionSerializer(serializers.ModelSerializer):
+
+    skill = SkillSerializer(many=True)
+
+    class Meta:
+        model = Jobseeker
+        fields = ['id', 'fname', 'lname', 'skill']

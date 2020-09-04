@@ -3,6 +3,10 @@ import './Assets/Login.css'
 import { NavLink, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../../../store/actions/auth'
+import { ownerdata } from '../../../Model/UserData'
+import {createBrowserHistory} from 'history';
+
+var history = createBrowserHistory()
 
 export class LoginView extends React.Component {
     constructor(props) {
@@ -10,25 +14,57 @@ export class LoginView extends React.Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            user_type: ''
         }
     }
-    heandelsubmit() {
-        console.log(this.state);
-        this.props.onAuth(this.state.email, this.state.password)
-        return <Redirect to="/" />
-    }
-    logout() {
-        this.props.logout()
-    }
+    
+    async heandelsubmit() {
+
+        var user = await this.props.onAuth(this.state.email, this.state.password)
+        var owner = await ownerdata(user)
+        this.setState({
+            user_type: owner.user_type
+        })
+
+        if(document.getElementById("error")){
+            var error = document.getElementById("error")
+            error.remove()
+            console.log(5);
+        }
+
+        if(owner.user_type !== "Company"){
+            var error = document.createElement("p")
+            console.log(6);
+            error.id = "error"
+            if(owner.email === undefined){
+                error.innerHTML = "Invalid details. Please check the Email ID - Password combination."
+            }
+            else if(owner.user_type !== "Company"){
+                error.innerHTML = "Invalid details. Please check the Email ID - Password combination. or You are using Jobseeker account"
+                this.props.logout()
+            }            
+            document.getElementById("err").appendChild(error)
+        }
+        if(!document.getElementById("error")){
+            history.push("/jobseeker")
+            window.location.reload()
+        }
+
+    } 
 
     render() {
+        if (this.state.user_type === "Company") {
+            this.setState({
+                user_type: ""
+            })
+            return <Redirect to="/jobseeker" />;
+        }
         return (
             <div>
                 <div className='header'>
                     <div className="container1">
                         <div style={{ float: 'left' }} className="headertitel">NAME</div>
-                        <div style={{ float: 'left' }} onClick={() => this.logout()}>Log Out</div>
                     </div>
                 </div>
                 <div className="login">
@@ -39,6 +75,7 @@ export class LoginView extends React.Component {
                                 <div>Hello!</div>
                                 <div>Welcome Back</div>
                             </h3>
+                            <div id="err"></div>
                             <div className="user">
                                 <input type='txet' placeholder="User/E-mail" onChange={(e) => { this.setState({ email: e.target.value }) }}></input>
                             </div>
@@ -49,7 +86,7 @@ export class LoginView extends React.Component {
                             <div className="submit" onClick={() => this.heandelsubmit.call(this)}>Login</div>
                             <div className="or">OR</div>
                             <div className="otp">Login via OTP</div>
-                            <NavLink className="signuplink" to="/recruit/register">
+                            <NavLink className="signuplink" to="/company/register">
                                 <div className="signup">New To Name? Sign Up</div>
                             </NavLink>
                         </div>

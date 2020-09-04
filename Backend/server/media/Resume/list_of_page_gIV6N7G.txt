@@ -1,0 +1,11 @@
+Page List
+
+1. Map Page
+2. Jobseeker Ragister Page
+3. Jobseeker Login Page
+4. Jobseeker Profile Page
+5. Company Register Page
+6. Company Login Page
+7. Company Profile Page
+8. Job Detail Page
+9. Home Page

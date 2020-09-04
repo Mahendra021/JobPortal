@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import queryString from 'query-string'
 import "../Profile/Assets/profile.css"
+import { Redirect } from "react-router-dom"
 import {JobIdData} from '../../../Model/JobData'
+import {createBrowserHistory} from 'history';
+
+var history = createBrowserHistory()
 
 export class ProfileView extends Component {
 
@@ -14,14 +19,26 @@ export class ProfileView extends Component {
 
     async componentWillMount(){
 
-        var data = await JobIdData(1)
+        let url = window.location.search;
+        let params = queryString.parse(url);
+
+        var data = await JobIdData(params.id)
         this.setState({
             data: data
         });
         console.log(data)
     }
+
+    hendeljob(){
+
+        history.push("/JobDetail?id="+this.state.data.job[0].id)
+        window.location.reload()
+    }
     
     render() {
+        // if (this.props.isAuthenticated===false) {
+        //     return <Redirect to="/" />;
+        // }
         return (
             <div>
                 <ul>
@@ -39,32 +56,32 @@ export class ProfileView extends Component {
                         </div>
                         <div className="mainDetail2" style={{marginTop:"20px"}}>
                             <h5>Jobs</h5>
-                            <div className="joblist">
+                            <div className="joblist" onClick={()=>this.hendeljob()}>
                                 <div className="white-space">job Description : {this.state.data.length !== 0 ? this.state.data.job[0].description : null}</div>
                                 Selery : {this.state.data.length !== 0 ? this.state.data.job[0].salary : null}<br />
                                 Job Type : {this.state.data.length !== 0 ? this.state.data.job[0].job_type : null}<br />
                             </div>
-                            <div className="joblist">
+                            <div className="joblist" onClick={()=>this.hendeljob()}>
                                 <div className="white-space">job Description : {this.state.data.length !== 0 ? this.state.data.job[0].description : null}</div>
                                 Selery : {this.state.data.length !== 0 ? this.state.data.job[0].salary : null}<br />
                                 Job Type : {this.state.data.length !== 0 ? this.state.data.job[0].job_type : null}<br />
                             </div>
-                            <div className="joblist">
+                            <div className="joblist" onClick={()=>this.hendeljob()}>
                                 <div className="white-space">job Description : {this.state.data.length !== 0 ? this.state.data.job[0].description : null}</div>
                                 Selery : {this.state.data.length !== 0 ? this.state.data.job[0].salary : null}<br />
                                 Job Type : {this.state.data.length !== 0 ? this.state.data.job[0].job_type : null}<br />
                             </div>
-                            <div className="joblist">
+                            <div className="joblist" onClick={()=>this.hendeljob()}>
                                 <div className="white-space">job Description : {this.state.data.length !== 0 ? this.state.data.job[0].description : null}</div>
                                 Selery : {this.state.data.length !== 0 ? this.state.data.job[0].salary : null}<br />
                                 Job Type : {this.state.data.length !== 0 ? this.state.data.job[0].job_type : null}<br />
                             </div>
-                            <div className="joblist">
+                            <div className="joblist" onClick={()=>this.hendeljob()}>
                                 <div className="white-space">job Description : {this.state.data.length !== 0 ? this.state.data.job[0].description : null}</div>
                                 Selery : {this.state.data.length !== 0 ? this.state.data.job[0].salary : null}<br />
                                 Job Type : {this.state.data.length !== 0 ? this.state.data.job[0].job_type : null}<br />
                             </div>
-                            <div style={{textAlign:"right"}}><a href>View All</a></div>
+                            <div style={{textAlign:"right"}}><a>View All</a></div>
                         </div>
                         <div className="mainDetail2" style={{marginTop:"20px"}}>
                             <h5>Video</h5>

@@ -92,9 +92,20 @@
 #login{
     float: right;
     cursor: pointer;
-    padding-right: 20px;
+    padding-right: 10px;
     padding-top: 7px;
 }
 #login a{
+    color: white;
+}
+
+#register{
+    float: right;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-top: 7px;
+}
+
+#register a{
     color: white;
 }

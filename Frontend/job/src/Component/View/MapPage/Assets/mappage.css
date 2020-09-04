@@ -85,8 +85,13 @@ code {
     min-width: 300px;
     max-width: 300px;
     min-height: 158px;
-    max-height: 158px;
-   
+    max-height: 158px;   
+}
+.popupimg2{
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 179px;
+    max-height: 179px;   
 }
 #text-block {
     position: absolute;
@@ -418,3 +423,17 @@ li {
     background-position: 23px 5px;
 }
 .filterlist:hover > .salarylist{display: block;}
+.typelist{
+    display: none;
+    color: black;
+    height: 20px;
+    padding-left: 39px;
+    margin-left: -15px;
+    border-top: 1px solid black;
+    font-size: 13px;
+    background-image: url(/images/Arrow.png);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: 23px 5px;
+}
+.filterlist:hover > .typelist{display: block;}

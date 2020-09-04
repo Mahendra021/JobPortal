@@ -54,3 +54,23 @@ export async function AddPostJob(data){
 
     return upload;
 }
+
+export async function AddSource(data){
+
+    var upload = await fetch("http://localhost:8000/jobapi/image/", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then((responseData) => {
+            upload = responseData;
+            return responseData;
+        })
+        .catch(error => console.log(error));
+
+    return upload;
+}

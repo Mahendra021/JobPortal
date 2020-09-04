@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
 import './Assets/mappage.css'
 import { createBrowserHistory } from 'history';
-import { JobData, k, FiterData } from '../../Model/JobData';
+import { JobData, CompanyData, AddressData, PostData, ImageSource, FiterData } from '../../Model/JobData';
 import queryString from 'query-string'
 import AddLayer from './AddLayer';
 import AddMapSource from './AddSource';
 import { hendelZoomIn, hendelZoomOut, hendelLacation, changeLayer } from './MapAction';
-import { hendelSuggestionlist,hendelSearch,hendelexperience,hendelsalary } from './Filter';
-import CreateJsonSource from '../../Controller/MapPage/CreateJsonSource';
+import { hendelSuggestionlist,hendelSearch,hendelexperience,hendeljobtype,hendelsalary } from './Filter';
+import {CreateJsonSource1} from '../../Controller/MapPage/CreateJsonSource';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZG1hbmNpbmkiLCJhIjoiY2loNzVmcHJqMGl4cnV1a2lvampzMWpoZSJ9.YXdMfQxLF_hS9Jrvu_9_Rw';
 var globalThis = null
@@ -84,22 +84,41 @@ export class MapPageView extends Component {
         var params = queryString.parse(url)
         var href = window.location.pathname
 
-        console.log(href)
+        console.log(params)
 
         if(href === '/map'){
             var data = await JobData()
+            // var company = await CompanyData()
+            // var address = await AddressData()
+            // var post = await PostData()
+            // var img = await ImageSource()
         }
-        else if(href === '/jobseeker'){
+        else if(href === '/recommended' || href === '/recommended/'){
             var data = await JobData()
+            // var company = await CompanyData()
+            // var address = await AddressData()
+            // var post = await PostData()
+            // var img = await ImageSource()
         }
-        else if(href === '/recommended'){
-            var data = await JobData()
+        else if(params.salary && params.exp && params.search){
+            var data = await FiterData(params.salary,params.exp,params.search)
         }
-        else{
-            var data = await FiterData(this.state.salaryfilter,this.state.experiencefilter,params.search)
+        else if(params.salary && params.exp){
+            var data = await FiterData(params.salary,params.exp,'')
+        }
+        else if(params.exp){
+            var data = await FiterData('',params.exp,'')
+        }
+        else if(params.salary){
+            var data = await FiterData(params.salary,'','')
+        }
+        else if(params.search){
+            var data = await FiterData('','',params.search)
         }
 
-        var features = CreateJsonSource(data);
+        var features = CreateJsonSource1(data)
+        console.log(features);
+        // var features = CreateJsonSource(address,company,post,img);
         this.state.features = features
 
         map.on('load', function () {
@@ -159,7 +178,7 @@ export class MapPageView extends Component {
                 var features = map.queryRenderedFeatures(e.point);
                 console.log(features[0])
                 if (features[0].properties.id !== undefined) {
-                    history.push("/JobDetail?id=" + features[0].properties.id)
+                    history.push("/company?id=" + features[0].properties.id)
                     window.location.reload()
                 }
             });
@@ -265,7 +284,7 @@ export class MapPageView extends Component {
                 var item = document.createElement('a');
                 item.target = '_blank';
                 item.onclick = () => {
-                    history.push("/JobDetail?id=" + feature.properties.id)
+                    history.push("/company?id=" + feature.properties.id)
                     window.location.reload()
                 }
                 item.innerHTML = '<div class="mainHolder12" style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(0, 0, 0, 0.7)), url(' + "'" + '/images/' + feature.properties.img + '.jpg' + "'" + ');">\
@@ -348,14 +367,17 @@ export class MapPageView extends Component {
                             <img className="filter" src="/images/filter.png" />
                         </div>
                         <div className="Filterdiv">
-                            <div className="filterlist">Experience
-                                <div className="experiencelist" style={{ marginTop: "4px", borderTop: " 1px solid black" }} onClick={() => hendelexperience.call(this, '1')}>1</div>
+                            <div className="filterlist">
+                                Experience
+                                <div className="experiencelist" style={{ marginTop: "4px", borderTop: " 1px solid black" }} onClick={() => hendelexperience.call(this, '0')}>Fresher</div>
+                                <div className="experiencelist" onClick={() => hendelexperience.call(this, '1')}>1</div>
                                 <div className="experiencelist" onClick={() => hendelexperience.call(this, '2')}>2</div>
                                 <div className="experiencelist" onClick={() => hendelexperience.call(this, '3')}>3</div>
                                 <div className="experiencelist" onClick={() => hendelexperience.call(this, '4')}>4</div>
                                 <div className="experiencelist" style={{ borderBottom: 'none' }} onClick={() => hendelexperience.call(this, '5')}>5</div>
                             </div>
-                            <div className="filterlist">Salary
+                            <div className="filterlist">
+                                Salary
                                 <div className="salarylist" style={{ marginTop: "4px", borderTop: " 1px solid black" }} onClick={() => hendelsalary.call(this, '10000')}>10000</div>
                                 <div className="salarylist" onClick={() => hendelsalary.call(this, '15000')}>15000</div>
                                 <div className="salarylist" onClick={() => hendelsalary.call(this, '20000')}>20000</div>
@@ -365,10 +387,15 @@ export class MapPageView extends Component {
                                 <div className="salarylist" onClick={() => hendelsalary.call(this, '40000')}>40000</div>
                                 <div className="salarylist" style={{ borderBottom: 'none' }} onClick={() => hendelsalary.call(this, '50000')}>50000</div>
                             </div>
-                            <div className="filterlist">Job Type
+                            <div className="filterlist">
+                                Job Type
+                                <div className="typelist" style={{ marginTop: "4px", borderTop: " 1px solid black" }} onClick={() => (this, 'Part Time')}>PART TIME</div>
+                                <div className="typelist" onClick={() => (this, 'Full Time')}>FULL TIME</div>
+                                <div className="typelist" style={{ borderBottom: 'none' }} onClick={() => (this, 'Intership')}>INTERSHIP</div>
                             </div>
-                            <div className="filterlist">Fresher</div>
-                            <div className="filterlist">Industy</div>
+                            <div className="filterlist">
+                                Industy
+                            </div>
                             <div className="filterlist">Qualifications</div>
                             <div className="filterlist">Role</div>
                             <div className="filterlist" style={{ borderBottom: '0px' }}>Staff</div>

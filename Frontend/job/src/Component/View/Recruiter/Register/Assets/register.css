@@ -35,3 +35,15 @@
 .banner1 .activ~div{
     opacity: .6;
 }
+.react-dropdown-select{
+    width: 65% !important;
+    border-radius: 0px !important;
+    height: 43px;
+    font-size: 17px;
+}
+.react-dropdown-select-content {
+    margin-left: 5px;
+}
+.react-dropdown-select-dropdown{
+    width: 100% ;
+}

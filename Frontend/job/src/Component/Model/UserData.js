@@ -15,12 +15,7 @@ export async function ownerdata(token){
 }
 
 export async function userdata(pk,token) {
-    var data = await fetch("http://localhost:8000/userapi/user/?owner="+pk,{
-        method : 'GET',    
-        headers : {
-                'Authorization' : 'Token '+token
-        }
-    })
+    var data = await fetch("http://localhost:8000/userapi/user/?owner="+pk)
     .then(response => response.json())
     .then(result => {
         return result
@@ -29,8 +24,8 @@ export async function userdata(pk,token) {
     return data;
 }
 
-export async function useraddress(){
-    var data = await fetch("http://localhost:8000/userapi/address/")
+export async function useraddress(pk){
+    var data = await fetch("http://localhost:8000/userapi/address/?owner="+pk)
         .then(response => response.json())
         .then(result => {
             return result
@@ -39,8 +34,8 @@ export async function useraddress(){
     return data
 }
 
-export async function usersource(){
-    var data = await fetch("http://localhost:8000/userapi/source/")
+export async function usersource(pk){
+    var data = await fetch("http://localhost:8000/userapi/source/?owner="+pk)
         .then(response => response.json())    
         .then(result => {
             return result
@@ -49,8 +44,8 @@ export async function usersource(){
     return data
 }
 
-export async function higher_education(){
-    var data = await fetch("http://localhost:8000/userapi/higher_education/")
+export async function higher_education(pk){
+    var data = await fetch("http://localhost:8000/userapi/higher_education/?owner="+pk)
         .then(response => response.json())
         .then(result => {
             return result
@@ -59,8 +54,39 @@ export async function higher_education(){
     return data
 }
 
-export async function education(){
+export async function education(pk){
     var data = await fetch("http://localhost:8000/userapi/education/")
+    .then(response => response.json())
+    .then(result => {
+        return result
+    })
+
+    return data
+}
+
+export async function userallData(){
+    var data = await fetch("http://localhost:8000/userapi/map/")
+    .then(response => response.json())
+    .then(result => {
+        return result
+    })
+
+    return data
+}
+
+export async function SuggestionNameData(name){
+    
+    var data = await fetch('http://localhost:8000/userapi/suggetion?search=' + name)
+    .then(response => response.json())
+    .then(result => {
+        return result
+    })
+
+    return data
+}
+
+export async function FilterNameData(experians,name){
+    var data = await fetch('http://localhost:8000/userapi/filter?experians__lte'+experians+'&search=' + name)
     .then(response => response.json())
     .then(result => {
         return result
