@@ -57,6 +57,7 @@ export class MapPageView extends Component {
         else {
             JsonData = this.state.features;
         }
+
         var NewJson = [];
 
         for (var i = 0; i < JsonData.length; i++) {
@@ -88,34 +89,35 @@ export class MapPageView extends Component {
 
         if(href === '/map'){
             var data = await JobData()
-            // var company = await CompanyData()
-            // var address = await AddressData()
-            // var post = await PostData()
-            // var img = await ImageSource()
+            console.log(1);
         }
         else if(href === '/recommended' || href === '/recommended/'){
             var data = await JobData()
-            // var company = await CompanyData()
-            // var address = await AddressData()
-            // var post = await PostData()
-            // var img = await ImageSource()
+            console.log(1);
         }
         else if(params.salary && params.exp && params.search){
             var data = await FiterData(params.salary,params.exp,params.search)
+            console.log(2);
         }
         else if(params.salary && params.exp){
             var data = await FiterData(params.salary,params.exp,'')
+            console.log(3);
         }
         else if(params.exp){
             var data = await FiterData('',params.exp,'')
+            console.log(4);
         }
         else if(params.salary){
             var data = await FiterData(params.salary,'','')
+            console.log(5);
         }
         else if(params.search){
             var data = await FiterData('','',params.search)
+            console.log(6);
         }
-
+        else if(href === '/map/'){
+            var data = await JobData()
+        }
         var features = CreateJsonSource1(data)
         console.log(features);
         // var features = CreateJsonSource(address,company,post,img);

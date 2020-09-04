@@ -33,8 +33,6 @@ export class RegisterView extends Component {
         });
     
         map.on('click',  function (e) {;
-            console.log(e.lngLat.lng)
-            console.log(e.lngLat.lat);
 
             globalThis.setState({
                 xcoord : e.lngLat.lng,

@@ -75,7 +75,7 @@ export async function hendelSearch (map){
     var Params = queryString.parse(url)
     var data,features
     var name = document.getElementById('suggestion').value
-    if(window.location.pathname === "/map" || window.location.pathname === "/recommended"){
+    if(window.location.pathname === "/map" || window.location.pathname === "/map/" || window.location.pathname === "/recommended" || window.location.pathname === "/recommended/"){
         data = await FiterData('', '', name)
         features = CreateJsonSource1(data)
         history.push("/map/?search="+name)   
@@ -116,7 +116,7 @@ export async function hendelSearch (map){
         history.push("/map/?exp="+Params.exp+"&search="+name)
     }
     this.addSource(features)
-    if (name.length === 0) {
+    if (features === []) {
         this.setState({
             list: [],
             filter: []
@@ -124,7 +124,8 @@ export async function hendelSearch (map){
     }
     else {
         this.setState({
-            list: features
+            list: features,
+            features : features
         })
     }
     var long = this.state.search[0]
@@ -149,7 +150,7 @@ export async function hendelexperience(experience) {
     var url = window.location.search
     var Params = queryString.parse(url)
     var data,features
-    if(window.location.pathname === "/map" || window.location.pathname === "/recommended"){
+    if(window.location.pathname === "/map" || window.location.pathname === "/map/" || window.location.pathname === "/recommended" || window.location.pathname === "/recommended/"){
         data = await FiterData('', experience, '')
         features = CreateJsonSource1(data)
         history.push("/map/?exp="+experience)   
@@ -190,7 +191,7 @@ export async function hendelexperience(experience) {
         history.push("/map/?salary="+Params.salary+"&search="+Params.search)
     }
     this.addSource(features)
-    if (experience.length === 0) {
+    if (features === []) {
         this.setState({
             list: [],
             filter: []
@@ -199,10 +200,11 @@ export async function hendelexperience(experience) {
     else {
         this.setState({
             experiencefilter: experience,
-            filter: features
+            filter: features,
+            features : features
         })
     }
-    console.log(Params);
+    console.log(features);
 }
 
 export async function hendelsalary(salary) {
@@ -210,7 +212,7 @@ export async function hendelsalary(salary) {
     var url = window.location.search
     var Params = queryString.parse(url)
     var data,features
-    if(window.location.pathname === "/map" || window.location.pathname === "/recommended"){
+    if(window.location.pathname === "/map" || window.location.pathname === "/map/" || window.location.pathname === "/recommended" || window.location.pathname === "/recommended/"){
         data = await FiterData(salary, '', '')
         features = CreateJsonSource1(data)
         history.push("/map/?salary="+salary)   
@@ -251,7 +253,7 @@ export async function hendelsalary(salary) {
         history.push("/map/?salary="+salary+"&search="+Params.search)
     }
     this.addSource(features)
-    if (salary.length === 0) {
+    if (features === []) {
         this.setState({
             list: [],
             filter: []
@@ -260,10 +262,11 @@ export async function hendelsalary(salary) {
     else {
         this.setState({
             salaryfilter: salary,
-            filter: features
+            filter: features,
+            features : features
         })
     }
-    console.log(Params);
+    console.log(features);
 }
 
 export function hendelHomeSearch(){
@@ -346,7 +349,8 @@ export async function hendelSearchName(map){
     }
     else {
         this.setState({
-            list: features
+            list: features,
+            features : features
         })
     }
     var long = this.state.search[0]
@@ -370,7 +374,7 @@ export async function hendeluserexperience(experience){
     var url = window.location.search
     var Params = queryString.parse(url)
     var data,features
-    if(window.location.pathname === "/map" || window.location.pathname === "/recommended"){
+    if(window.location.pathname === "/jobseeker" || window.location.pathname === "/jobseeker/"){
         data = await FilterNameData(experience, '')
         features = CreateJsonSource2(data)   
     }
@@ -389,7 +393,8 @@ export async function hendeluserexperience(experience){
     else {
         this.setState({
             experiencefilter: experience,
-            filter: features
+            filter: features,
+            features : features
         })
     }
 }

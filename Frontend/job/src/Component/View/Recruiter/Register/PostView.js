@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import mapboxgl from 'mapbox-gl'
 import { Redirect } from 'react-router-dom'
 import Select from "react-dropdown-select";
 import {createBrowserHistory} from 'history';
 import { AddPostJob, AddCompanyAddress } from '../../../Model/JobUploadData';
 
 var history = createBrowserHistory()
-
+var globalThis = null
 const options = [
     { value: 'Full Time', label: 'Full Time' },
     { value: 'Part Time', label: 'Part Time' },
@@ -22,6 +23,34 @@ export class PostView extends Component {
             pin: '',country: '',description: '' ,
             labelField: "label",valueField: "value",
         }
+
+        globalThis = this
+    }
+
+    async componentDidMount() {
+
+        var map = new mapboxgl.Map({
+            container: 'map1', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            center: [72.5714, 23.0225], // starting position [lng, lat]
+            zoom: 14 // starting zoom
+        });
+    
+        map.on('click',  function (e) {;
+
+            globalThis.setState({
+                xcoord : e.lngLat.lng,
+                ycoord : e.lngLat.lat
+            })
+
+            console.log(globalThis.state);
+
+            document.getElementsByClassName('mapview')[0].style.display="none"
+            
+        });
+
+        document.getElementsByClassName('mapview')[0].style.display="none"
+        
     }
 
     async hendelregister(){
@@ -135,8 +164,14 @@ export class PostView extends Component {
                             <div className="middle">
                             <input className="address3" placeholder="Pin code" type="number" onChange={(e) => { this.setState({ pin: e.target.value }) }} />
                             <input className="address3" placeholder="Country" onChange={(e) => { this.setState({ country: e.target.value }) }} />
+                            <span className="cordinet" onClick={()=>{document.getElementsByClassName('mapview')[0].style.display = 'block'}}>
+                                Open Map
+                            </span>
                             <br/>
                                 <span id="add_err" className="err"></span>
+                            </div>
+                            <div className="mapview">
+                                <div id="map1"></div>
                             </div>
                         </div>
                         <div style={{ marginBottom: '10px' }}>
