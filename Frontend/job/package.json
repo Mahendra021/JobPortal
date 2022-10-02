@@ -10,7 +10,7 @@
     "axios": "^0.21.1",
     "history": "^4.10.1",
     "mapbox": "^1.0.0-beta10",
-    "mapbox-gl": "^1.7.0",
+    "mapbox-gl": "^1.13.2",
     "node-fetch": "^2.6.0",
     "query-string": "^6.10.1",
     "react": "^16.12.0",
